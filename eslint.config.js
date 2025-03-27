@@ -1,5 +1,5 @@
-import js from '@eslint/js'
-import tseslint from 'typescript-eslint'
+import js from '@eslint/js';
+import tseslint from 'typescript-eslint';
 
 export default [
   js.configs.recommended,
@@ -20,7 +20,8 @@ export default [
       '@typescript-eslint/no-explicit-any': 'warn',
       'multiline-comment-style': ['warn', 'starred-block'],
       'eol-last': ['error', 'always'],
-      'indent': ['error', 2]
+      'indent': ['error', 2],
+      'semi': ['error', 'always']
     },
   },
-]
+];

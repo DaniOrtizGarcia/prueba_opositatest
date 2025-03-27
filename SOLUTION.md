@@ -13,3 +13,15 @@ Se han eliminado los símbolos `^` y `~` de las versiones para tener las version
 Se ha eliminado el `package-lock.json` y he hecho de nuevo el `npm install` por un problema de incompatibilidad con algunas dependencias entre Mac y Windows.
 
 ## Añadir configuración de eslint
+
+## Cambiar los ficheros de book-list a kebab case
+
+## Añadir sass
+He decidido utilizar sass por varias razones:
+-- La anidación: en un futuro me permitirá la utilización de buenas prácticas como `BEM`
+-- Mixins: esto me permitirá hacer el scss más reutilizable y escalable
+
+## Creación de los ficheros global.scss y _varibles.scss
+El global.scss tendrá los estilos genéricos de toda la aplicación
+En el fichero de _variables.scss tendremos todas las variables que se utilicen
+En el fichero de configuración de vite, se ha añadido la configuración para que no sea necesario importar el fichero de variables.scss dentro de los otros fichero scss, sino que se importe automáticamente.

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import lodash from 'lodash';
-import './booksList.css';
+import './books-list.scss';
 
 const BooksList: React.FC = () => {
   const [libros, setLibros] = useState<any[]>([]);
