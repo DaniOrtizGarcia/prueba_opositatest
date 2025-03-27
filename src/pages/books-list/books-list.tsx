@@ -247,9 +247,6 @@ const BooksList: React.FC = () => {
             </div>
         )}
         </div>
-        <div className='footer'>
-            Prueba técnica OpositaTest
-        </div>
     </>
   );
 };
