@@ -11,3 +11,5 @@ Se han eliminado los símbolos `^` y `~` de las versiones para tener las version
 ### Cambios en el package-lock.json:
 
 Se ha eliminado el `package-lock.json` y he hecho de nuevo el `npm install` por un problema de incompatibilidad con algunas dependencias entre Mac y Windows.
+
+## Añadir configuración de eslint
