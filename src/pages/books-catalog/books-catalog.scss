@@ -1,11 +1,10 @@
-.body {
-  display: flex;
-  flex-direction: column;
-}
-
 .books-catalog {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   padding: 24px;
+
+  &__content {
+    width: 100%;
+  }
 }

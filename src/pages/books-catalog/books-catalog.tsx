@@ -3,6 +3,7 @@ import lodash from 'lodash';
 import './books-catalog.scss';
 import { Book, Books } from './interfaces/books.interface';
 import SearchBar from '../../components/search-bar/search-bar';
+import BooksSearchActions from './components/books-search-actions/books-search-actions';
 
 const BooksCatalog: React.FC = () => {
   const [libros, setLibros] = useState<Books>([]);
@@ -10,9 +11,9 @@ const BooksCatalog: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
-  const [recentBooks, setRecentBooks] = useState<Set<string>>(new Set());
+  const [recentViewBooks, setRecentViewBooks] = useState<Set<string>>(new Set());
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
-  const [isSortedAsc, setIsSortedAsc] = useState<boolean>(true);
+  const [isSortedAsc, setIsSortedAsc] = useState<boolean>(false);
   const [sortedBooks, setSortedBooks] = useState<Books>([]);
 
   useEffect(() => {
@@ -50,9 +51,9 @@ const BooksCatalog: React.FC = () => {
   const handleSort = () => {
     const sortedBooks = libros.sort((a, b) => {
       if (isSortedAsc) {
-        return a.name.localeCompare(b.name); // Orden ascendente
+        return b.name.localeCompare(a.name);
       } else {
-        return b.name.localeCompare(a.name); // Orden descendente
+        return a.name.localeCompare(b.name);
       }
     });
     setSortedBooks(sortedBooks as Books);
@@ -62,7 +63,7 @@ const BooksCatalog: React.FC = () => {
   // Presiona un libro
   const handleBook = (bk: Book) => {
     setSelectedBook(bk);
-    setRecentBooks((prev) => new Set(prev).add(bk.url));
+    setRecentViewBooks((prev) => new Set(prev).add(bk.url));
   };
 
   // Press the favorites button
@@ -91,28 +92,17 @@ const BooksCatalog: React.FC = () => {
       ) : error ? (
         <p style={{ color: 'red' }}>{error}</p>
       ) : (
-        <div className="body">
-          <p><strong>Libros encontrados:</strong> {booksData().length}</p>
+        <div className="books-catalog__content">
+          <BooksSearchActions
+            recentViewBooks={recentViewBooks}
+            totalBooks={booksData().length}
+            handleSort={handleSort}
+            isSortedAsc={isSortedAsc}
+            handleBook={handleBook}
+            libros={libros}
+          />
 
-          <button style={{ marginBottom: '10px' }} onClick={handleSort}>{isSortedAsc ? 'Ordenar Descendente' : 'Ordenar Ascendente'}</button>
-
-          {recentBooks.size > 0 && (
-            <div>
-              <h3>Recientes</h3>
-              {Array.from(recentBooks).map((url) => {
-                const book = libros.find((b) => b.url === url);
-                return book ? (
-                  <div style={{ marginBottom: '10px' }}>
-                    <button onClick={() => handleBook(book)}>
-                      {book.name}
-                    </button>
-                  </div>
-                ) : null;
-              })}
-              <h3>Lista de libros</h3>
-            </div>
-          )}
-
+          <h3>Lista de libros</h3>
           <div className="books-catalog">
             {sortedBooks.length > 0 ? sortedBooksData().map((book: Book, index) => (
               <div key={index} style={{ display: 'flex', flexDirection: 'column' }}>

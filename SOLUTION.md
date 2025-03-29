@@ -41,3 +41,6 @@ Se han eliminado los comentarios de código, más tarde se eliminarán los otros
 
 ## Crear componente SearchBar
 He creado el componente SearchBar en la carpeta components general ya que es un componente que se podría reutilizar en otras páginas.
+
+## Crear componente BooksSearchActions
+He creado el componente de las acciones como el mostrar recientes y la acción de ordenar.

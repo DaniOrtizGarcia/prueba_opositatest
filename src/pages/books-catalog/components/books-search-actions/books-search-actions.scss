@@ -1,0 +1,27 @@
+.books-search-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: variables.$spacing-6;
+
+  &__total {
+    &__text {
+      font-weight: bold;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: variables.$spacing-4;
+
+    &__sort {
+      height: fit-content;
+      padding: variables.$spacing-1 variables.$spacing-2;
+      border-radius: 5px;
+      border: 0;
+      background-color: variables.$color-black;
+      color: variables.$color-white;
+      cursor: pointer;
+    }
+  }
+}
