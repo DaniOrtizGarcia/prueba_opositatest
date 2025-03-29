@@ -44,3 +44,5 @@ He creado el componente SearchBar en la carpeta components general ya que es un 
 
 ## Crear componente BooksSearchActions
 He creado el componente de las acciones como el mostrar recientes y la acción de ordenar.
+
+## Crear componente BooksCatalog

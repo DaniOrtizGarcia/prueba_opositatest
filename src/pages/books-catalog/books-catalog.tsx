@@ -4,6 +4,7 @@ import './books-catalog.scss';
 import { Book, Books } from './interfaces/books.interface';
 import SearchBar from '../../components/search-bar/search-bar';
 import BooksSearchActions from './components/books-search-actions/books-search-actions';
+import BookCard from './components/book-card/book-card';
 
 const BooksCatalog: React.FC = () => {
   const [libros, setLibros] = useState<Books>([]);
@@ -103,53 +104,24 @@ const BooksCatalog: React.FC = () => {
           />
 
           <h3>Lista de libros</h3>
-          <div className="books-catalog">
-            {sortedBooks.length > 0 ? sortedBooksData().map((book: Book, index) => (
-              <div key={index} style={{ display: 'flex', flexDirection: 'column' }}>
-                <img
-                  src={`https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`}
-                />
-                <button
-                  onClick={() => handleBook(book)}
-                  style={{ cursor: 'pointer', marginRight: '10px' }}
-                >
-                  {book.name}
-                </button>
-                <button
-                  onClick={() => handleFavorite(book)}
-                  style={{
-                    backgroundColor: favorites.has(book.url) ? 'gold' : '#ddd',
-                    padding: '5px',
-                    cursor: 'pointer',
-                  }}
-                >
-                  {favorites.has(book.url) ? '★' : '☆'}
-                </button>
-              </div>
-            )) : booksData().map((book: Book, index) => (
-              <div key={index} style={{ display: 'flex', flexDirection: 'column' }}>
-                <img
-                  src={`https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`}
-                />
-                <button
-                  onClick={() => handleBook(book)}
-                  style={{ cursor: 'pointer', marginRight: '10px' }}
-                >
-                  {book.name}
-                </button>
-                <button
-                  onClick={() => handleFavorite(book)}
-                  style={{
-                    backgroundColor: favorites.has(book.url) ? 'gold' : '#ddd',
-                    padding: '5px',
-                    cursor: 'pointer',
-                  }}
-                >
-                  {favorites.has(book.url) ? '★' : '☆'}
-                </button>
-              </div>
+          <div className="books-catalog__content__list">
+            {sortedBooks.length > 0 ? sortedBooksData().map((book: Book) => (
+              <BookCard
+                key={book.isbn}
+                book={book}
+                handleBook={handleBook}
+                handleFavorite={handleFavorite}
+                favorites={favorites}
+              />
+            )) : booksData().map((book: Book) => (
+              <BookCard
+                key={book.isbn}
+                book={book}
+                handleBook={handleBook}
+                handleFavorite={handleFavorite}
+                favorites={favorites}
+              />
             ))}
-
           </div>
         </div>
       )}

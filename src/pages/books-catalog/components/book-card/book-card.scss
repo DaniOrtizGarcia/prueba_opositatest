@@ -1,0 +1,13 @@
+.book-card {
+  padding: variables.$spacing-3;
+  border: 2px solid variables.$color-gray-dark;
+
+  &__image {
+    display: block;
+    width: auto;
+    height: 85%;
+    max-height: 300px;
+    margin: auto;
+    margin-bottom: variables.$spacing-3;
+  }
+} 
