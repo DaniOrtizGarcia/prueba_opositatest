@@ -33,3 +33,8 @@ Solo se importa el fichero _variables.scss en vez de todo el documento global.sc
 
 ## Cambio de nombre del componente BooksList a BooksCatalog
 Se ha cambiado el nombre para que sea más descriptivo.
+
+## Eliminar errores, warnings y comentarios de código
+Se han eliminado todos los errores y warning de eslint
+Se ha creado un interface de Book
+Se han eliminado los comentarios de código, más tarde se eliminarán los otros comentarios descriptivos, por ahora no se han borrado porque algunas funciones no tienen un naming descriptivo.
