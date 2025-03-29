@@ -25,3 +25,11 @@ He decidido utilizar sass por varias razones:
 El global.scss tendrá los estilos genéricos de toda la aplicación
 En el fichero de _variables.scss tendremos todas las variables que se utilicen
 En el fichero de configuración de vite, se ha añadido la configuración para que no sea necesario importar el fichero de variables.scss dentro de los otros fichero scss, sino que se importe automáticamente.
+
+## Cambio de @import a @use porque @import está deprecado
+Se ha cambiado el uso de @import por @use
+Ahora las variables se utilizan variables.$variable
+Solo se importa el fichero _variables.scss en vez de todo el documento global.scss
+
+## Cambio de nombre del componente BooksList a BooksCatalog
+Se ha cambiado el nombre para que sea más descriptivo.

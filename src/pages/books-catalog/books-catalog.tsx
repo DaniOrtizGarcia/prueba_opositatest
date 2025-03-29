@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import lodash from 'lodash';
-import './books-list.scss';
+import './books-catalog.scss';
 
-const BooksList: React.FC = () => {
+const BooksCatalog: React.FC = () => {
   const [libros, setLibros] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -142,7 +142,7 @@ const BooksList: React.FC = () => {
                 </div>
             )}
 
-                <div  className="books-list">
+                <div  className="books-catalog">
                   {sortedBooks.length > 0 ? sortedBooksData().map((book: any, index) => (
                 <div key={index} style={{ display: 'flex', flexDirection: 'column' }}>
                     <img
@@ -251,4 +251,4 @@ const BooksList: React.FC = () => {
   );
 };
 
-export default BooksList;
+export default BooksCatalog;

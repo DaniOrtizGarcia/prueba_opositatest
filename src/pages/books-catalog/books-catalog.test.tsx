@@ -1,10 +1,10 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
-import BooksList from './books-list';
+import BooksCatalog from './books-catalog';
 
-describe('BooksList', () => {
+describe('BooksCatalog', () => {
   it('renderiza correctamente', async () => {
-    render(<BooksList />);
+    render(<BooksCatalog />);
 
     expect(screen.getByPlaceholderText(/Buscar libro/i)).toBeInTheDocument();
     expect(screen.getByText(/Actualizar libros/i)).toBeInTheDocument();
@@ -15,7 +15,7 @@ describe('BooksList', () => {
   });
 
   it('filtra los libros por el término de búsqueda', async () => {
-    render(<BooksList />);
+    render(<BooksCatalog />);
 
     await waitFor(() => {
       expect(screen.queryByText('A Dance with Dragons')).toBeInTheDocument();
@@ -29,7 +29,7 @@ describe('BooksList', () => {
   });
 
   it('marca fav', async () => {
-    render(<BooksList />);
+    render(<BooksCatalog />);
 
     await waitFor(() => screen.getByText('A Game of Thrones'));
 
@@ -40,7 +40,7 @@ describe('BooksList', () => {
   });
 
   it('detalles', async () => {
-    render(<BooksList />);
+    render(<BooksCatalog />);
 
     await waitFor(() => screen.getByText('A Game of Thrones'));
 
@@ -51,7 +51,7 @@ describe('BooksList', () => {
   });
 
   it('cierra el modal', async () => {
-    render(<BooksList />);
+    render(<BooksCatalog />);
 
     await waitFor(() => screen.getByText('A Game of Thrones'));
 

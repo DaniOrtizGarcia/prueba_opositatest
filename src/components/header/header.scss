@@ -1,15 +1,15 @@
 .header {
-  padding: $spacing-3 $spacing-6;
-  background-color: $color-black;
+  padding: variables.$spacing-3 variables.$spacing-6;
+  background-color: variables.$color-black;
   text-align: center;
 
   &__logo {
     width: auto;
-    height: $spacing-12;
+    height: variables.$spacing-12;
     filter: brightness(0) invert(1);
   }
 
-  @media (min-width: $breakpoint-md) {
+  @media (min-width: variables.$breakpoint-md) {
     text-align: left;
   }
 }
