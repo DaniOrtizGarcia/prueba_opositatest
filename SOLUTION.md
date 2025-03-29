@@ -38,3 +38,6 @@ Se ha cambiado el nombre para que sea más descriptivo.
 Se han eliminado todos los errores y warning de eslint
 Se ha creado un interface de Book
 Se han eliminado los comentarios de código, más tarde se eliminarán los otros comentarios descriptivos, por ahora no se han borrado porque algunas funciones no tienen un naming descriptivo.
+
+## Crear componente SearchBar
+He creado el componente SearchBar en la carpeta components general ya que es un componente que se podría reutilizar en otras páginas.
