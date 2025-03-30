@@ -48,3 +48,5 @@ He creado el componente de las acciones como el mostrar recientes y la acción d
 ## Crear componente BooksCatalog
 
 ## Crear componente global Modal
+
+## Crear componente BookModal

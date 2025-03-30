@@ -3,9 +3,6 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  display: flex;
-  flex-wrap: wrap;
-  gap: variables.$spacing-6;
   width: 50%;
   max-width: 650px;
   padding: variables.$spacing-6;

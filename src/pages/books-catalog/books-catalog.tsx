@@ -6,6 +6,7 @@ import SearchBar from '../../components/search-bar/search-bar';
 import BooksSearchActions from './components/books-search-actions/books-search-actions';
 import BookCard from './components/book-card/book-card';
 import Modal from '../../components/modal/modal';
+import BookModal from './components/book-modal/book-modal';
 
 const BooksCatalog: React.FC = () => {
   const [libros, setLibros] = useState<Books>([]);
@@ -129,49 +130,11 @@ const BooksCatalog: React.FC = () => {
 
       {selectedBook &&
         <Modal>
-          <>
-            <img
-              src={`https://covers.openlibrary.org/b/isbn/${selectedBook.isbn}-M.jpg`}
-            />
-
-            <div className='modal__information'>
-              <h2>{selectedBook.name}</h2>
-              <p><strong>Autor:</strong> {selectedBook.authors.join(', ')}</p>
-              <p><strong>Editorial:</strong> {selectedBook.publisher}</p>
-              <p><strong>Páginas:</strong> {selectedBook.numberOfPages}</p>
-              <p><strong>Año:</strong> {selectedBook.released}</p>
-              <button
-                onClick={() => handleFavorite(selectedBook)}
-                style={{
-                  backgroundColor: '#007bff',
-                  color: 'white',
-                  padding: '10px',
-                  cursor: 'pointer',
-                  marginBottom: '10px',
-                }}
-              >
-                {favorites.has(selectedBook.url) ? 'Quitar de favoritos' : 'Agregar a favoritos'}
-              </button>
-              <button
-                onClick={() => setSelectedBook(null)}
-                style={{
-                  backgroundColor: '#ccc',
-                  padding: '10px',
-                  cursor: 'pointer',
-                  display: 'block',
-                  marginBottom: '10px',
-                }}
-              >
-                Cerrar
-              </button>
-              <button
-                onClick={() => window.open(selectedBook.url, '_blank')}
-                style={{ backgroundColor: '#02874a', color: 'white', padding: '10px', cursor: 'pointer' }}
-              >
-                Abrir API en el navegador
-              </button>
-            </div>
-          </>
+          <BookModal
+            selectedBook={selectedBook}
+            favorites={favorites}
+            handleFavorite={handleFavorite}
+            setSelectedBook={setSelectedBook} />
         </Modal>
       }
     </div>
