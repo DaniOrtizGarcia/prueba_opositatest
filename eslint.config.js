@@ -15,7 +15,8 @@ export default [
     },
     rules: {
       'no-console': 'error',
-      'no-unused-vars': 'error',
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': 'warn',
       'eqeqeq': ['error', 'always'],
       '@typescript-eslint/no-explicit-any': 'warn',
       'multiline-comment-style': ['warn', 'starred-block'],

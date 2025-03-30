@@ -59,3 +59,13 @@ Se ha mejorado la lógica y el naming de los libros recientes del componente de 
 ## Mejorar la funcionalidad y naming de las funciones relacionadas con el componente de BookCard y BookModal
 Se ha mejorado la lógica y el naming de las funciones de favoritos y cerrar modal en el componente BooksCatalog y BookModal.
 Se ha mejorado la lógica y el diseño de las funciones de conseguir la imágen en el componente BookCard.
+
+## Creado useBooksCatalog
+Tener el componente BooksCatalog más limpio
+
+## Creado booksUtils
+Tener más limpios los componentes y poder reutilizar bien las funciones en varios componentes
+
+## Utilizar el export directamente en la definición del componente
+
+## Corregida regla de eslint

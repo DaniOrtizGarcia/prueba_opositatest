@@ -3,12 +3,11 @@ import "./search-bar.scss";
 
 interface SearchBarProps {
   searchQuery: string;
-  // eslint-disable-next-line no-unused-vars
   handleSearch: (searchValue: string) => void;
   inputPlaceholder: string;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({searchQuery, handleSearch, inputPlaceholder}) => {
+export const SearchBar: React.FC<SearchBarProps> = ({searchQuery, handleSearch, inputPlaceholder}) => {
   return (
     <div className="search-bar">
       <input
@@ -21,5 +20,3 @@ const SearchBar: React.FC<SearchBarProps> = ({searchQuery, handleSearch, inputPl
     </div>
   );
 };
-
-export default SearchBar;

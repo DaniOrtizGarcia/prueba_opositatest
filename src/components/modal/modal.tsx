@@ -4,7 +4,7 @@ interface ModalProps {
   children: React.ReactNode;
 }
 
-const Modal: React.FC<ModalProps> = ({ children }) => {
+export const Modal: React.FC<ModalProps> = ({ children }) => {
   return (
     <>
       <div className="modal">
@@ -14,5 +14,3 @@ const Modal: React.FC<ModalProps> = ({ children }) => {
     </>
   );
 };
-
-export default Modal;

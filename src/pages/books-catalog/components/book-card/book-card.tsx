@@ -1,26 +1,25 @@
 import React from 'react';
 import './book-card.scss';
 import { Book } from '../../interfaces/books.interface';
+import { getBookCoverUrl } from '../../utils/books-utils';
 
 interface BookCardProps {
   book: Book;
-  // eslint-disable-next-line no-unused-vars
   handleOpenBookModal: (book: Book) => void;
-  // eslint-disable-next-line no-unused-vars
   handleFavorite: (book: Book) => void;
   favorites: string[];
 }
 
-const BookCard: React.FC<BookCardProps> = ({ book, handleOpenBookModal, handleFavorite, favorites }) => {
+export const BookCard: React.FC<BookCardProps> = ({ book, handleOpenBookModal, handleFavorite, favorites }) => {
 
-  const getUrlOfTheBookImage = (isbn: string) => `https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg`;
+  const favoriteIcon = favorites.includes(book.isbn) ? '★' : '☆';
 
   return (
     <div className='book-card'>
       <img
         className='book-card__image'
         alt={book.name}
-        src={getUrlOfTheBookImage(book.isbn)}
+        src={getBookCoverUrl(book.isbn)}
       />
       <div className='book-card__details'>
         <div className='book-card__details__header'>
@@ -41,7 +40,7 @@ const BookCard: React.FC<BookCardProps> = ({ book, handleOpenBookModal, handleFa
           onClick={() => handleFavorite(book)}
           style={{color: favorites.includes(book.isbn) ? 'gold' : 'black'}}
         >
-          {favorites.includes(book.isbn) ? '★' : '☆'}
+          {favoriteIcon}
         </button>
       </div>
 
@@ -54,5 +53,3 @@ const BookCard: React.FC<BookCardProps> = ({ book, handleOpenBookModal, handleFa
     </div>
   );
 };
-
-export default BookCard;
