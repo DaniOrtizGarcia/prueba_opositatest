@@ -1,47 +1,33 @@
-import { useEffect, useState } from 'react';
-import { Book, Books } from '../interfaces/books.interface';
+import { useMemo, useState } from 'react';
+import { Book, SortOrder } from '../interfaces/books.interface';
+import { useFetchBooks } from './use-fetch-books';
 
 export const useBooksCatalog = () => {
-  const [books, setBooks] = useState<Books>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [favorites, setFavorites] = useState<string[]>([]);
   const [recentViewedBooks, setRecentViewedBooks] = useState<Set<string>>(new Set());
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
-  const [isSortedAsc, setIsSortedAsc] = useState<boolean>(false);
+  const [isSorted, setIsSorted] = useState<SortOrder>(SortOrder.None);
 
-  useEffect(() => {
-    initBooks();
-  }, []);
-
-  // Fetch books from API
-  const initBooks = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch('https://anapioficeandfire.com/api/books');
-      const data = await response.json();
-      setBooks(data);
-      setError(null);
-    } catch {
-      setError('Error fetching books');
-    } finally {
-      setLoading(false);
-    }
-  };
+  const {
+    books,
+    isLoading,
+    isError
+  } = useFetchBooks();
 
   const handleSearch = (searchValue: string) => {
     setSearchQuery(searchValue);
   };
 
   const handleSortBooks = () => {
-    const sortedBooks = [...books].sort((a, b) => {
-      const order = isSortedAsc ? -1 : 1;
-      return order * a.name.localeCompare(b.name);
-    });
-    setBooks(sortedBooks);
-    setIsSortedAsc(!isSortedAsc);
+    setIsSorted(isSorted === SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending);
   };
+
+  const getSortedBooks = useMemo(() => 
+    isSorted === SortOrder.None ? books : [...books].sort((a, b) => {
+      const order = isSorted === SortOrder.Descending ? -1 : 1;
+      return order * a.name.localeCompare(b.name);
+    }), [books, isSorted]);
 
   const handleOpenBookModal = (selectedBook: Book) => {
     setSelectedBook(selectedBook);
@@ -65,17 +51,18 @@ export const useBooksCatalog = () => {
 
   return {
     books,
-    loading,
-    error,
+    isLoading,
+    error: isError ? 'Error al buscar los libros' : null,
     searchQuery,
     favorites,
     recentViewedBooks,
     selectedBook,
-    isSortedAsc,
+    isSorted,
     handleSearch,
     handleSortBooks,
     handleOpenBookModal,
     handleCloseBookModal,
     handleFavorite,
+    getSortedBooks
   };
 };

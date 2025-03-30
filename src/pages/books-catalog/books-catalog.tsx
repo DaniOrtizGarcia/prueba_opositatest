@@ -12,25 +12,26 @@ import { Book } from './interfaces/books.interface';
 export const BooksCatalog: React.FC = () => {
   const {
     books,
-    loading,
+    isLoading,
     error,
     searchQuery,
     favorites,
     recentViewedBooks,
     selectedBook,
-    isSortedAsc,
+    isSorted,
     handleSearch,
     handleSortBooks,
     handleOpenBookModal,
     handleCloseBookModal,
     handleFavorite,
+    getSortedBooks
   } = useBooksCatalog();
 
   return (
     <div className='books-catalog'>
       <SearchBar searchQuery={searchQuery} handleSearch={handleSearch} inputPlaceholder={'Buscar libros'} />
 
-      {loading ? (
+      {isLoading ? (
         <p>Cargando...</p>
       ) : error ? (
         <p style={{ color: 'red' }}>{error}</p>
@@ -40,14 +41,14 @@ export const BooksCatalog: React.FC = () => {
             recentViewedBooks={recentViewedBooks}
             totalBooks={filterBooksByQuery(books, searchQuery).length || 0}
             handleSortBooks={handleSortBooks}
-            isSortedAsc={isSortedAsc}
+            isSorted={isSorted}
             handleOpenBookModal={handleOpenBookModal}
             books={books}
           />
 
           <h3 className='books-catalog__content__subtitle'>Lista de libros</h3>
           <div className="books-catalog__content__list">
-            {filterBooksByQuery(books, searchQuery).map((book: Book) => (
+            {filterBooksByQuery(getSortedBooks, searchQuery).map((book: Book) => (
               <BookCard
                 key={book.isbn}
                 book={book}

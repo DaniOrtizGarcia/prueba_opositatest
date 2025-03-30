@@ -69,3 +69,8 @@ Tener más limpios los componentes y poder reutilizar bien las funciones en vari
 ## Utilizar el export directamente en la definición del componente
 
 ## Corregida regla de eslint
+
+## Utilizar librería ya instalada React Query
+Se ha creado un servicio donde hace la llamada para conseguir los libros
+Se ha creado un custom hook donde se utiliza la lógica de React Query
+Se ha modificado la función de ordenar ya que no servía como estaba hecho anteriormente 
