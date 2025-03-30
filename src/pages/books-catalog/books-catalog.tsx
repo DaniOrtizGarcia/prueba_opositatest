@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import lodash from 'lodash';
 import './books-catalog.scss';
 import { Book, Books } from './interfaces/books.interface';
 import SearchBar from '../../components/search-bar/search-bar';
@@ -9,15 +8,14 @@ import Modal from '../../components/modal/modal';
 import BookModal from './components/book-modal/book-modal';
 
 const BooksCatalog: React.FC = () => {
-  const [libros, setLibros] = useState<Books>([]);
+  const [books, setBooks] = useState<Books>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
-  const [recentViewBooks, setRecentViewBooks] = useState<Set<string>>(new Set());
+  const [recentViewedBooks, setRecentViewedBooks] = useState<Set<string>>(new Set());
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
   const [isSortedAsc, setIsSortedAsc] = useState<boolean>(false);
-  const [sortedBooks, setSortedBooks] = useState<Books>([]);
 
   useEffect(() => {
     initBooks();
@@ -29,7 +27,7 @@ const BooksCatalog: React.FC = () => {
     try {
       const response = await fetch('https://anapioficeandfire.com/api/books');
       const data = await response.json();
-      setLibros(data);
+      setBooks(data);
       setError(null);
     } catch {
       setError('Error fetching books');
@@ -38,35 +36,24 @@ const BooksCatalog: React.FC = () => {
     }
   };
 
-  const booksData = () => {
-    return lodash.filter(libros, (b: Book) =>
-      lodash.includes(lodash.toLower(b.name), lodash.toLower(searchQuery))
-    );
+  const handleSearch = (searchValue: string) => {
+    setSearchQuery(searchValue);
   };
 
-  const sortedBooksData = () => {
-    return lodash.filter(sortedBooks, (b: Book) =>
-      lodash.includes(lodash.toLower(b.name), lodash.toLower(searchQuery))
-    );
-  };
+  const filteredAndSortedBooks = books.filter((book) => book.name.toLowerCase().includes(searchQuery.toLowerCase()));
 
-  // Sort the books by name
-  const handleSort = () => {
-    const sortedBooks = libros.sort((a, b) => {
-      if (isSortedAsc) {
-        return b.name.localeCompare(a.name);
-      } else {
-        return a.name.localeCompare(b.name);
-      }
+  const handleSortBooks = () => {
+    const sortedBooks = [...books].sort((a, b) => {
+      const order = isSortedAsc ? -1 : 1;
+      return order * a.name.localeCompare(b.name);
     });
-    setSortedBooks(sortedBooks as Books);
-    setIsSortedAsc(!isSortedAsc); // Cambiar la dirección del orden
+    setBooks(sortedBooks);
+    setIsSortedAsc(!isSortedAsc);
   };
 
-  // Presiona un libro
-  const handleBook = (bk: Book) => {
-    setSelectedBook(bk);
-    setRecentViewBooks((prev) => new Set(prev).add(bk.url));
+  const handleOpenBookModal = (selectedBook: Book) => {
+    setSelectedBook(selectedBook);
+    setRecentViewedBooks((prev) => new Set(prev).add(selectedBook.isbn));
   };
 
   // Press the favorites button
@@ -82,13 +69,9 @@ const BooksCatalog: React.FC = () => {
     });
   };
 
-  const handleSearch = (searchValue: string) => {
-    setSearchQuery(searchValue);
-  };
-
   return (
     <div className='books-catalog'>
-      <SearchBar searchQuery={searchQuery} handleSearch={handleSearch} inputPlaceholder={'Buscar libro'} />
+      <SearchBar searchQuery={searchQuery} handleSearch={handleSearch} inputPlaceholder={'Buscar libros'} />
 
       {loading ? (
         <p>Cargando...</p>
@@ -97,29 +80,21 @@ const BooksCatalog: React.FC = () => {
       ) : (
         <div className="books-catalog__content">
           <BooksSearchActions
-            recentViewBooks={recentViewBooks}
-            totalBooks={booksData().length}
-            handleSort={handleSort}
+            recentViewedBooks={recentViewedBooks}
+            totalBooks={filteredAndSortedBooks.length}
+            handleSortBooks={handleSortBooks}
             isSortedAsc={isSortedAsc}
-            handleBook={handleBook}
-            libros={libros}
+            handleOpenBookModal={handleOpenBookModal}
+            books={books}
           />
 
           <h3>Lista de libros</h3>
           <div className="books-catalog__content__list">
-            {sortedBooks.length > 0 ? sortedBooksData().map((book: Book) => (
+            {filteredAndSortedBooks.map((book: Book) => (
               <BookCard
                 key={book.isbn}
                 book={book}
-                handleBook={handleBook}
-                handleFavorite={handleFavorite}
-                favorites={favorites}
-              />
-            )) : booksData().map((book: Book) => (
-              <BookCard
-                key={book.isbn}
-                book={book}
-                handleBook={handleBook}
+                handleOpenBookModal={handleOpenBookModal}
                 handleFavorite={handleFavorite}
                 favorites={favorites}
               />

@@ -5,13 +5,13 @@ import { Book } from '../../interfaces/books.interface';
 interface BookCardProps {
   book: Book;
   // eslint-disable-next-line no-unused-vars
-  handleBook: (book: Book) => void;
+  handleOpenBookModal: (book: Book) => void;
   // eslint-disable-next-line no-unused-vars
   handleFavorite: (book: Book) => void;
   favorites: Set<string>;
 }
 
-const BookCard: React.FC<BookCardProps> = ({ book, handleBook, handleFavorite, favorites }) => {
+const BookCard: React.FC<BookCardProps> = ({ book, handleOpenBookModal, handleFavorite, favorites }) => {
   return (
     <div className='book-card'>
       <img
@@ -20,7 +20,7 @@ const BookCard: React.FC<BookCardProps> = ({ book, handleBook, handleFavorite, f
         src={`https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`}
       />
       <button
-        onClick={() => handleBook(book)}
+        onClick={() => handleOpenBookModal(book)}
         style={{ cursor: 'pointer', marginRight: '10px' }}
       >
         {book.name}
