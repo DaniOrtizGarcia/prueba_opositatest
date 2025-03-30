@@ -8,32 +8,48 @@ interface BookCardProps {
   handleOpenBookModal: (book: Book) => void;
   // eslint-disable-next-line no-unused-vars
   handleFavorite: (book: Book) => void;
-  favorites: Set<string>;
+  favorites: string[];
 }
 
 const BookCard: React.FC<BookCardProps> = ({ book, handleOpenBookModal, handleFavorite, favorites }) => {
+
+  const getUrlOfTheBookImage = (isbn: string) => `https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg`;
+
   return (
     <div className='book-card'>
       <img
         className='book-card__image'
         alt={book.name}
-        src={`https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`}
+        src={getUrlOfTheBookImage(book.isbn)}
       />
+      <div className='book-card__details'>
+        <div className='book-card__details__header'>
+          <h3
+            className='book-card__details__header__name'
+            title={book.name}
+          >
+            {book.name}
+          </h3>
+
+          <p className='book-card__details__header__author' title={book.authors.join(', ')}>
+            {book.authors.join(', ')}
+          </p>
+        </div>
+
+        <button
+          className='book-card__details__favorite'
+          onClick={() => handleFavorite(book)}
+          style={{color: favorites.includes(book.isbn) ? 'gold' : 'black'}}
+        >
+          {favorites.includes(book.isbn) ? '★' : '☆'}
+        </button>
+      </div>
+
       <button
+        className='book-card__view-more'
         onClick={() => handleOpenBookModal(book)}
-        style={{ cursor: 'pointer', marginRight: '10px' }}
       >
-        {book.name}
-      </button>
-      <button
-        onClick={() => handleFavorite(book)}
-        style={{
-          backgroundColor: favorites.has(book.url) ? 'gold' : '#ddd',
-          padding: '5px',
-          cursor: 'pointer',
-        }}
-      >
-        {favorites.has(book.url) ? '★' : '☆'}
+        ver más...
       </button>
     </div>
   );

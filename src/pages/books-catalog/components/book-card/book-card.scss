@@ -1,13 +1,52 @@
 .book-card {
+  display: flex;
+  flex-direction: column;
   padding: variables.$spacing-3;
   border: 2px solid variables.$color-gray-dark;
 
   &__image {
     display: block;
     width: auto;
-    height: 85%;
-    max-height: 300px;
-    margin: auto;
-    margin-bottom: variables.$spacing-3;
+    height: 70%;
+    max-height: 260px;
+    margin: 0 auto variables.$spacing-3;
+  }
+
+  &__details {
+    display: flex;
+    justify-content: space-between;
+    align-items: self-start;
+
+    &__header {
+      margin-bottom: variables.$spacing-4;
+  
+      &__title {
+        font-size: variables.$font-size-md;
+        font-weight: bold;
+        margin-bottom: variables.$spacing-2;
+      }
+  
+      &__author {
+        font-size: variables.$font-size-xs;
+      }
+    }
+
+    &__favorite {
+      font-size: variables.$font-size-3xl;
+      line-height: 1;
+      border: 0;
+      cursor: pointer;
+    }
+  }
+
+  &__view-more {
+    display: block;
+    font-size: variables.$font-size-md;
+    color: variables.$color-blue;
+    margin-left: auto;
+    margin-top: auto;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
   }
 } 

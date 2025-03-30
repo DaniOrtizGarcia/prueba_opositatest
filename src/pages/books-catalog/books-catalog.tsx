@@ -12,7 +12,7 @@ const BooksCatalog: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [favorites, setFavorites] = useState<Set<string>>(new Set());
+  const [favorites, setFavorites] = useState<string[]>([]);
   const [recentViewedBooks, setRecentViewedBooks] = useState<Set<string>>(new Set());
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
   const [isSortedAsc, setIsSortedAsc] = useState<boolean>(false);
@@ -56,16 +56,17 @@ const BooksCatalog: React.FC = () => {
     setRecentViewedBooks((prev) => new Set(prev).add(selectedBook.isbn));
   };
 
-  // Press the favorites button
-  const handleFavorite = (b: Book) => {
+  const handleCloseBookModal = () => {
+    setSelectedBook(null);
+  };
+
+  const handleFavorite = (book: Book) => {
     setFavorites((prev) => {
-      const newFavorites = new Set(prev);
-      if (newFavorites.has(b.url)) {
-        newFavorites.delete(b.url);
+      if (prev.includes(book.isbn)) {
+        return prev.filter((isbn) => isbn !== book.isbn);
       } else {
-        newFavorites.add(b.url);
+        return [...prev, book.isbn];
       }
-      return newFavorites;
     });
   };
 
@@ -88,7 +89,7 @@ const BooksCatalog: React.FC = () => {
             books={books}
           />
 
-          <h3>Lista de libros</h3>
+          <h3 className='books-catalog__content__subtitle'>Lista de libros</h3>
           <div className="books-catalog__content__list">
             {filteredAndSortedBooks.map((book: Book) => (
               <BookCard
@@ -109,7 +110,7 @@ const BooksCatalog: React.FC = () => {
             selectedBook={selectedBook}
             favorites={favorites}
             handleFavorite={handleFavorite}
-            setSelectedBook={setSelectedBook} />
+            handleCloseBookModal={handleCloseBookModal} />
         </Modal>
       }
     </div>

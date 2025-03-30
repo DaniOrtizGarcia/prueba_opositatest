@@ -55,3 +55,7 @@ He creado el componente de las acciones como el mostrar recientes y la acción d
 Se ha eliminado la librería lodash, ya que es una librería pesada que solo se utilizaba para hacer un filter que podemos hacer utilizando js.
 Se ha mejorado la lógica y el naming de las funciones de buscar, ordenar y mostrar libro en el modal en el componente BooksCatalog.
 Se ha mejorado la lógica y el naming de los libros recientes del componente de BooksSearchActions.
+
+## Mejorar la funcionalidad y naming de las funciones relacionadas con el componente de BookCard y BookModal
+Se ha mejorado la lógica y el naming de las funciones de favoritos y cerrar modal en el componente BooksCatalog y BookModal.
+Se ha mejorado la lógica y el diseño de las funciones de conseguir la imágen en el componente BookCard.

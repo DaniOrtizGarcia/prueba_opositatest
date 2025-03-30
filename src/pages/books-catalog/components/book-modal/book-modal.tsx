@@ -3,18 +3,21 @@ import './book-modal.scss';
 
 interface BookModalProps {
   selectedBook: Book;
-  favorites: Set<string>;
+  favorites: string[];
   // eslint-disable-next-line no-unused-vars
   handleFavorite: (book: Book) => void;
-  // eslint-disable-next-line no-unused-vars
-  setSelectedBook: (book: Book | null) => void;
+  handleCloseBookModal: () => void;
 }
 
-const BookModal: React.FC<BookModalProps> = ({ selectedBook, favorites, handleFavorite, setSelectedBook }) => {
+const BookModal: React.FC<BookModalProps> = ({ selectedBook, favorites, handleFavorite, handleCloseBookModal }) => {
+
+  // Extraer función en un utils.ts
+  const getUrlOfTheBookImage = (isbn: string) => `https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg`;
+
   return (
     <div className="book-modal">
       <img
-        src={`https://covers.openlibrary.org/b/isbn/${selectedBook.isbn}-M.jpg`}
+        src={getUrlOfTheBookImage(selectedBook.isbn)}
       />
 
       <div className='book-modal__information'>
@@ -33,10 +36,10 @@ const BookModal: React.FC<BookModalProps> = ({ selectedBook, favorites, handleFa
             marginBottom: '10px',
           }}
         >
-          {favorites.has(selectedBook.url) ? 'Quitar de favoritos' : 'Agregar a favoritos'}
+          {favorites.includes(selectedBook.isbn) ? 'Quitar de favoritos' : 'Agregar a favoritos'}
         </button>
         <button
-          onClick={() => setSelectedBook(null)}
+          onClick={() => handleCloseBookModal()}
           style={{
             backgroundColor: '#ccc',
             padding: '10px',
