@@ -1,13 +1,16 @@
 import { useMemo, useState } from 'react';
-import { Book, SortOrder } from '../interfaces/books.interface';
+import { Book, Books, SortOrderType } from '../interfaces/books.interface';
 import { useFetchBooks } from './use-fetch-books';
+
+const ASCENDING = -1;
+const DESCENDING = 1;
 
 export const useBooksCatalog = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [favorites, setFavorites] = useState<string[]>([]);
   const [recentViewedBooks, setRecentViewedBooks] = useState<Set<string>>(new Set());
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
-  const [isSorted, setIsSorted] = useState<SortOrder>(SortOrder.None);
+  const [sortOrder, setSortOrder] = useState<SortOrderType>(SortOrderType.None);
 
   const {
     books,
@@ -15,30 +18,39 @@ export const useBooksCatalog = () => {
     isError
   } = useFetchBooks();
 
-  const handleSearch = (searchValue: string) => {
+  const handleSearch = (searchValue: string): void => {
     setSearchQuery(searchValue);
   };
 
-  const handleSortBooks = () => {
-    setIsSorted(isSorted === SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending);
+  const handleSortBooks = (): void => {
+    const changedSortOrder = sortOrder === SortOrderType.Ascending ? 
+      SortOrderType.Descending : SortOrderType.Ascending;
+    setSortOrder(
+      changedSortOrder
+    );
   };
 
-  const getSortedBooks = useMemo(() => 
-    isSorted === SortOrder.None ? books : [...books].sort((a, b) => {
-      const order = isSorted === SortOrder.Descending ? -1 : 1;
-      return order * a.name.localeCompare(b.name);
-    }), [books, isSorted]);
+  const sortedBooks = useMemo((): Books => {
+    if (sortOrder === SortOrderType.None) {
+      return books;
+    }
 
-  const handleOpenBookModal = (selectedBook: Book) => {
+    return [...books].sort((a, b) => {
+      const order = sortOrder === SortOrderType.Descending ? ASCENDING : DESCENDING;
+      return order * a.name.localeCompare(b.name);
+    });
+  }, [books, sortOrder]);
+
+  const handleOpenBookModal = (selectedBook: Book): void => {
     setSelectedBook(selectedBook);
     setRecentViewedBooks((prev) => new Set([...prev, selectedBook.isbn]));
   };
 
-  const handleCloseBookModal = () => {
+  const handleCloseBookModal = (): void => {
     setSelectedBook(null);
   };
 
-  const handleFavorite = (book: Book) => {
+  const handleFavorite = (book: Book): void => {
     const isBookAlreadyMarkedAsFav = favorites.includes(book.isbn);
 
     if (isBookAlreadyMarkedAsFav) {
@@ -57,12 +69,12 @@ export const useBooksCatalog = () => {
     favorites,
     recentViewedBooks,
     selectedBook,
-    isSorted,
+    sortOrder,
     handleSearch,
     handleSortBooks,
     handleOpenBookModal,
     handleCloseBookModal,
     handleFavorite,
-    getSortedBooks
+    sortedBooks
   };
 };

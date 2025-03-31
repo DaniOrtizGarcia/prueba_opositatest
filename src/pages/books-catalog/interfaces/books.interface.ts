@@ -14,7 +14,7 @@ export interface Book {
   povCharacters: string[];
 }
 
-export enum SortOrder {
+export enum SortOrderType {
   Ascending = 'Ascending',
   Descending = 'Descending',
   None = 'None',

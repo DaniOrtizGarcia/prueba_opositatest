@@ -1,5 +1,5 @@
 import { Book } from '../../interfaces/books.interface';
-import { getBookCoverUrl } from '../../utils/books-utils';
+import { formatDate, getBookCoverUrl } from '../../utils/books-utils';
 import './book-modal.scss';
 
 interface BookModalProps {
@@ -20,35 +20,44 @@ export const BookModal: React.FC<BookModalProps> = ({ selectedBook, favorites, h
       />
 
       <div className='book-modal__information'>
-        <h2>{selectedBook.name}</h2>
-        <p><strong>Autor:</strong> {selectedBook.authors.join(', ')}</p>
-        <p><strong>Editorial:</strong> {selectedBook.publisher}</p>
-        <p><strong>Páginas:</strong> {selectedBook.numberOfPages}</p>
-        <p><strong>Año:</strong> {selectedBook.released}</p>
-        <button
-          onClick={() => handleFavorite(selectedBook)}
-          style={{
-            backgroundColor: '#007bff',
-            color: 'white',
-            padding: '10px',
-            cursor: 'pointer',
-            marginBottom: '10px',
-          }}
-        >
-          {favoriteIcon}
+        <button className='book-modal__information__close' onClick={() => handleCloseBookModal()}>
+          X
         </button>
-        <button
-          onClick={() => handleCloseBookModal()}
-          style={{
-            backgroundColor: '#ccc',
-            padding: '10px',
-            cursor: 'pointer',
-            display: 'block',
-            marginBottom: '10px',
-          }}
-        >
-          Cerrar
-        </button>
+
+        <div className='book-modal__information__header'>
+          <h2 className='book-modal__information__header__title'>{selectedBook.name}</h2>
+
+          <button
+            className='book-modal__information__header__favorite'
+            onClick={() => handleFavorite(selectedBook)}
+            style={{color: favorites.includes(selectedBook.isbn) ? 'gold' : 'black'}}
+          >
+            {favoriteIcon}
+          </button>
+        </div>
+
+        <div className='book-modal__information__details'>
+          <p className='book-modal__information__details__text'>
+            <span className='book-modal__information__details__text__key'>Autor:</span>
+            {selectedBook.authors.join(', ')}
+          </p>
+          <p className='book-modal__information__details__text'>
+            <span className='book-modal__information__details__text__key'>Editorial:</span>
+            {selectedBook.publisher}
+          </p>
+          <p className='book-modal__information__details__text'>
+            <span className='book-modal__information__details__text__key'>ISBN:</span>
+            {selectedBook.isbn}
+          </p>
+          <p className='book-modal__information__details__text'>
+            <span className='book-modal__information__details__text__key'>Páginas:</span>
+            {selectedBook.numberOfPages}
+          </p>
+          <p className='book-modal__information__details__text'>
+            <span className='book-modal__information__details__text__key'>Año:</span>
+            {formatDate(selectedBook.released, '/')}
+          </p>
+        </div>
       </div>
     </div>
   );

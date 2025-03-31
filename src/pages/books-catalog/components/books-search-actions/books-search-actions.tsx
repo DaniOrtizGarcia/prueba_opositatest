@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
-import { Book, Books, SortOrder } from '../../interfaces/books.interface';
+import { Book, Books, SortOrderType } from '../../interfaces/books.interface';
 import './books-search-actions.scss';
 
 interface BooksSearchActionsProps {
   recentViewedBooks: Set<string>;
   totalBooks: number;
   handleSortBooks: () => void;
-  isSorted: SortOrder;
+  isSorted: SortOrderType;
   handleOpenBookModal: (book: Book) => void;
   books: Books;
 }
@@ -16,11 +16,11 @@ export const BooksSearchActions: React.FC<BooksSearchActionsProps> = (
 ) => {
 
   const recentViewedBooksList = useMemo(
-    () => books.filter((book: Book) => recentViewedBooks.has(book.isbn)),
+    (): Books => books.filter((book: Book) => recentViewedBooks.has(book.isbn)),
     [books, recentViewedBooks]
   );
 
-  const sortButtonText = isSorted === SortOrder.Ascending ? 'Ordenar Descendente' : 'Ordenar Ascendente';
+  const sortButtonText = isSorted === SortOrderType.Ascending ? 'Ordenar Descendente' : 'Ordenar Ascendente';
 
   return (
     <div className="books-search-actions">
