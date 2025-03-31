@@ -1,0 +1,21 @@
+.status-message {
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+  margin: auto;
+  padding: variables.$spacing-3 variables.$spacing-5;
+  border-radius: variables.$spacing-1;
+
+  &.error {
+    background-color: variables.$color-red;
+  }
+
+  &.info {
+    background-color: variables.$color-blue;
+  }
+
+  &__text {
+    color: white;
+    font-weight: bold;
+  }
+}

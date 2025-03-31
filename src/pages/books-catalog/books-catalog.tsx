@@ -6,8 +6,13 @@ import { BookCard } from './components/book-card/book-card';
 import { Modal } from '../../components/modal/modal';
 import { BookModal } from './components/book-modal/book-modal';
 import { useBooksCatalog } from './hooks/use-books-catalog';
-import { filterBooksByQuery } from './utils/books-utils';
+import { filterBooksByQuery, getErrorMessage } from './utils/books-utils';
 import { Book } from './interfaces/books.interface';
+import { Loader } from '../../components/loader/loader';
+import { StatusMessage, StatusMessageType } from '../../components/status-message/status-message';
+
+const INPUT_PLACEHOLDER_BOOKS = 'Buscar libros';
+const NOT_FOUND_BOOKS_TEXT = 'No se han encontrado libros.';
 
 export const BooksCatalog: React.FC = () => {
   const {
@@ -32,15 +37,18 @@ export const BooksCatalog: React.FC = () => {
   const filteredBooks = filterBooksByQuery(sortedBooks, searchQuery);
   const booksLength = filteredBooks.length || 0;
 
+  const isContentVisible = !isLoading && !error && booksLength > 0;
+  const isBookListEmpty = !booksLength && !isLoading && !error;
+
+  const loadingBooksError = getErrorMessage(error);
+
   return (
     <div className='books-catalog'>
-      <SearchBar searchQuery={searchQuery} handleSearch={handleSearch} inputPlaceholder={'Buscar libros'} />
+      <SearchBar searchQuery={searchQuery} handleSearch={handleSearch} inputPlaceholder={INPUT_PLACEHOLDER_BOOKS} />
 
-      {isLoading ? (
-        <p>Cargando...</p>
-      ) : error ? (
-        <p style={{ color: 'red' }}>{error}</p>
-      ) : (
+      {isLoading && <Loader />}
+
+      {isContentVisible && (
         <div className="books-catalog__content">
           <BooksSearchActions
             recentViewedBooks={recentViewedBooks}
@@ -66,6 +74,10 @@ export const BooksCatalog: React.FC = () => {
           </div>
         </div>
       )}
+
+      {error && !isLoading && <StatusMessage status={StatusMessageType.ERROR} message={loadingBooksError} />}
+
+      {isBookListEmpty && <StatusMessage status={StatusMessageType.INFO} message={NOT_FOUND_BOOKS_TEXT} />}
 
       {selectedBook &&
         <Modal>

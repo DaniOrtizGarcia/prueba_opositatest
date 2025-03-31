@@ -87,3 +87,10 @@ Se ha utilizado la función get del http-client.
 
 ## Creada utilidad getErrorMessage
 Se ha creado esta utilidad para recibir un error de tipo string y devolver un error por defecto.
+
+## Creado ShowMessage
+Se ha creado un componente para mostrar un mensaje al usuario, como una información o un error.
+Es escalable para soportar más estados.
+
+# Creado Loader
+Se ha hecho un spinner con scss para indicar al usuario que se están cargando los datos.

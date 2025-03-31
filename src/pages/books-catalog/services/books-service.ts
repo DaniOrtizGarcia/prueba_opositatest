@@ -9,7 +9,7 @@ export const fetchBooks = async (): Promise<Books> => {
     const data = await response.json();
     return data.map(booksResponse);
   } catch {
-    throw new Error('Error al solicitar los libros');
+    throw new Error('Error al solicitar los libros.');
   }
 };
 

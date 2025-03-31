@@ -1,0 +1,16 @@
+.loader {
+  margin: auto;
+  
+  &__spinner {
+    width: variables.$spacing-10;
+    height: variables.$spacing-10;
+    border: variables.$spacing-1 solid variables.$color-gray;
+    border-radius: 50%;
+    border-top-color: variables.$color-black;
+    animation: spin 1s ease-in-out infinite;
+  }
+}
+  
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
