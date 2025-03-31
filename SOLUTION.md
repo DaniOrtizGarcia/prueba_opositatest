@@ -73,4 +73,7 @@ Tener más limpios los componentes y poder reutilizar bien las funciones en vari
 ## Utilizar librería ya instalada React Query
 Se ha creado un servicio donde hace la llamada para conseguir los libros
 Se ha creado un custom hook donde se utiliza la lógica de React Query
-Se ha modificado la función de ordenar ya que no servía como estaba hecho anteriormente 
+Se ha modificado la función de ordenar ya que no servía como estaba hecho anteriormente
+
+## Lógica y estilos de la funcionalidad vistos recientemente
+Se ha hecho una animación para desplegar o ocultar el contendor que muestra los libros vistos recientemente

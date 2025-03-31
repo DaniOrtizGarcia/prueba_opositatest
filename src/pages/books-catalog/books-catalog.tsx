@@ -24,7 +24,9 @@ export const BooksCatalog: React.FC = () => {
     handleOpenBookModal,
     handleCloseBookModal,
     handleFavorite,
-    sortedBooks
+    sortedBooks,
+    showRecentViewed,
+    handleShowRecentViewed
   } = useBooksCatalog();
 
   const filteredBooks = filterBooksByQuery(sortedBooks, searchQuery);
@@ -47,9 +49,10 @@ export const BooksCatalog: React.FC = () => {
             isSorted={sortOrder}
             handleOpenBookModal={handleOpenBookModal}
             books={books}
+            showRecentViewed={showRecentViewed}
+            handleShowRecentViewed={handleShowRecentViewed}
           />
 
-          <h3 className='books-catalog__content__subtitle'>Lista de libros</h3>
           <div className="books-catalog__content__list">
             {filteredBooks.map((book: Book) => (
               <BookCard

@@ -10,7 +10,8 @@ export const useBooksCatalog = () => {
   const [favorites, setFavorites] = useState<string[]>([]);
   const [recentViewedBooks, setRecentViewedBooks] = useState<Set<string>>(new Set());
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
-  const [sortOrder, setSortOrder] = useState<SortOrderType>(SortOrderType.None);
+  const [sortOrder, setSortOrder] = useState<SortOrderType>(SortOrderType.None);  
+  const [showRecentViewed, setShowRecentViewed] = useState(false);
 
   const {
     books,
@@ -61,6 +62,10 @@ export const useBooksCatalog = () => {
     setFavorites((prev) => [...prev, book.isbn]);
   };
 
+  const handleShowRecentViewed = (): void => {
+    setShowRecentViewed((prev) => !prev);
+  };
+
   return {
     books,
     isLoading,
@@ -75,6 +80,8 @@ export const useBooksCatalog = () => {
     handleOpenBookModal,
     handleCloseBookModal,
     handleFavorite,
-    sortedBooks
+    sortedBooks,
+    showRecentViewed,
+    handleShowRecentViewed
   };
 };
