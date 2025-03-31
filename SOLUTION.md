@@ -77,3 +77,13 @@ Se ha modificado la función de ordenar ya que no servía como estaba hecho ante
 
 ## Lógica y estilos de la funcionalidad vistos recientemente
 Se ha hecho una animación para desplegar o ocultar el contendor que muestra los libros vistos recientemente
+
+## Creado fichero http-client
+Se ha creado el metodo GET, en un futuro sería fácil de escalar para POST, PUT y DELETE
+
+## Mejorar la lógica del servicio de libros
+Se ha hecho un mapping de la salida del servicio.
+Se ha utilizado la función get del http-client.
+
+## Creada utilidad getErrorMessage
+Se ha creado esta utilidad para recibir un error de tipo string y devolver un error por defecto.

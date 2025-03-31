@@ -16,7 +16,7 @@ export const useBooksCatalog = () => {
   const {
     books,
     isLoading,
-    isError
+    error
   } = useFetchBooks();
 
   const handleSearch = (searchValue: string): void => {
@@ -69,7 +69,7 @@ export const useBooksCatalog = () => {
   return {
     books,
     isLoading,
-    error: isError ? 'Error al buscar los libros' : null,
+    error,
     searchQuery,
     favorites,
     recentViewedBooks,
