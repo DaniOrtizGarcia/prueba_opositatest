@@ -1,4 +1,4 @@
-import { get } from '../../../infrastrcutre/http-client';
+import { get } from '../../../infrastructure/http-client';
 import { ApiBook, Book, Books } from '../interfaces/books.interface';
 
 const BOOKS_LIST_API_URL = 'https://anapioficeandfire.com/api/books';
