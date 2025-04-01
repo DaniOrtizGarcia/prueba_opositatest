@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
-import BooksCatalog from './books-catalog';
+import { BooksCatalog } from './books-catalog';
 
 describe('BooksCatalog', () => {
   it('renderiza correctamente', async () => {
