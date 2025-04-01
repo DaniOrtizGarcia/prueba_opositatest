@@ -1,0 +1,42 @@
+.button {
+  cursor: pointer;
+  border: 0;
+
+  &.default {
+    height: fit-content;
+    color: variables.$color-white;
+    background-color: variables.$color-black;
+    padding: variables.$spacing-1 variables.$spacing-2;
+    border-radius: 5px;
+  }
+
+  &.link {
+    width: fit-content;
+    color: variables.$color-black;
+    background-color: transparent;
+    font-size: variables.$font-size-sm;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  &.close-icon {
+    position: absolute;
+    top: - variables.$spacing-3;
+    right: 0;
+    font-size: variables.$font-size-2xl;
+    font-weight: lighter;
+    background-color: transparent;
+    border: 0;
+  }
+
+  &.only-icon {
+    font-size: variables.$font-size-3xl;
+    background-color: transparent;
+    line-height: 1;
+  }
+
+  &:disabled {
+    background-color: variables.$color-gray-dark;
+    cursor: not-allowed;
+  }
+}
