@@ -96,3 +96,6 @@ Es escalable para soportar más estados.
 Se ha hecho un spinner con scss para indicar al usuario que se están cargando los datos.
 
 ## Creado provider para la configuración por defecto de react query
+
+## Creado utils global
+Se ha creado un fichero de utils global para las funciones genércias.
