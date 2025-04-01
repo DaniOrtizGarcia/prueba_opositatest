@@ -1,4 +1,3 @@
-import React from "react";
 import "./search-bar.scss";
 
 interface SearchBarProps {

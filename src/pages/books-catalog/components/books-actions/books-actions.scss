@@ -17,21 +17,6 @@
     &__actions {
       display: flex;
       gap: variables.$spacing-4;
-  
-      &__button {
-        height: fit-content;
-        padding: variables.$spacing-1 variables.$spacing-2;
-        border-radius: 5px;
-        border: 0;
-        background-color: variables.$color-black;
-        color: variables.$color-white;
-        cursor: pointer;
-
-        &:disabled {
-          background-color: variables.$color-gray-dark;
-          cursor: not-allowed;
-        }
-      }
     }
   }
 

@@ -40,7 +40,7 @@ export const BooksCatalog = () => {
   const isContentVisible = !isLoading && !error && booksLength > 0;
   const isBookListEmpty = !booksLength && !isLoading && !error;
 
-  const loadingBooksErrorMessage = getErrorMessage(error);
+  const fetchBooksErrorMessage = getErrorMessage(error);
 
   return (
     <div className='books-catalog'>
@@ -82,7 +82,7 @@ export const BooksCatalog = () => {
         </div>
       )}
 
-      {error && !isLoading && <StatusMessage status={StatusMessageType.ERROR} message={loadingBooksErrorMessage} />}
+      {error && !isLoading && <StatusMessage status={StatusMessageType.ERROR} message={fetchBooksErrorMessage} />}
 
       {isBookListEmpty && <StatusMessage status={StatusMessageType.INFO} message='No se han encontrado libros.' />}
 

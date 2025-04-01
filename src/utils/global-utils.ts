@@ -11,7 +11,9 @@ export const formatDate = (date: string, separator: string): string => {
 export const getErrorMessage = (error: Error | null): string => {
   const defaultError = 'Error en la llamada';
 
-  if (typeof error === 'string') return error;
+  if (typeof error === 'string') {
+    return error;
+  };
   
   if (error instanceof Error) {
     return error.message || error.toString();

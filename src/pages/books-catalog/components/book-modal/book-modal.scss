@@ -6,17 +6,6 @@
     width: 100%;
     position: relative;
 
-    &__close {
-      position: absolute;
-      top: - variables.$spacing-3;
-      right: 0;
-      font-size: variables.$font-size-2xl;
-      font-weight: lighter;
-      background-color: transparent;
-      border: 0;
-      cursor: pointer;
-    }
-
     &__header {
       display: flex;
       align-items: center;
@@ -25,14 +14,6 @@
 
       &__title {
         font-size: variables.$font-size-3xl;
-      }
-
-      &__favorite {
-        font-size: variables.$font-size-3xl;
-        background-color: transparent;
-        line-height: 1;
-        border: 0;
-        cursor: pointer;
       }
     }
 

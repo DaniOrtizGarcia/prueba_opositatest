@@ -1,6 +1,7 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { Book, Books, SortOrderType } from '../../interfaces/books.interface';
 import './books-actions.scss';
+import { Button, ButtonTypes } from '../../../../components/button/button';
 
 interface BooksActionsProps {
   recentViewedBooks: Set<string>;
@@ -42,24 +43,22 @@ export const BooksActions: React.FC<BooksActionsProps> = (
         </p>
 
         <div className='books-actions__bar__actions'>
-          <button
-            className='books-actions__bar__actions__button'
+          <Button
+            text={showRecentViewsText}
             onClick={handleShowRecentViewed}
-            disabled={!haveRecentViewedBooks}>
-            {showRecentViewsText}
-          </button>
+            disabled={!haveRecentViewedBooks}
+          />
 
-          <button className='books-actions__bar__actions__button' onClick={handleSortBooks}>
-            {sortButtonText}
-          </button>
+          <Button
+            text={sortButtonText}
+            onClick={handleSortBooks}
+          />
 
-          <button
-            className='books-actions__bar__actions__button'
+          <Button
+            text='Limpiar filtros'
             onClick={handleResetFilters}
             disabled={isDisableResetButton}
-          >
-            Limpiar filtros
-          </button>
+          />
         </div>
       </div>
 
@@ -71,13 +70,12 @@ export const BooksActions: React.FC<BooksActionsProps> = (
         }}
       >
         {recentViewedBooksList.map((book: Book) => (
-          <button
+          <Button
             key={book.isbn}
-            className='books-actions__recent-viewed__book-name'
+            type={ButtonTypes.LINK}
+            text={book.name}
             onClick={() => handleOpenBookModal(book)}
-          >
-            {book.name}
-          </button>
+          />
         ))}
       </div>
     </div>

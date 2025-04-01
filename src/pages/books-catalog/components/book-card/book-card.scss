@@ -31,24 +31,5 @@
         font-size: variables.$font-size-xs;
       }
     }
-
-    &__favorite {
-      font-size: variables.$font-size-3xl;
-      background-color: transparent;
-      line-height: 1;
-      border: 0;
-      cursor: pointer;
-    }
-  }
-
-  &__view-more {
-    display: block;
-    font-size: variables.$font-size-md;
-    color: variables.$color-blue;
-    margin-left: auto;
-    margin-top: auto;
-    background-color: transparent;
-    border: 0;
-    cursor: pointer;
   }
 } 

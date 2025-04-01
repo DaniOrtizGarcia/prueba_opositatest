@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Book, Books, SeacrhOptionsType, SortOrderType } from '../interfaces/books.interface';
+import { Book, Books, SearchOptionsType, SortOrderType } from '../interfaces/books.interface';
 import { useFetchBooks } from './use-fetch-books';
 
 const ASCENDING = -1;
@@ -12,7 +12,7 @@ export const useBooksCatalog = () => {
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
   const [sortOrder, setSortOrder] = useState<SortOrderType>(SortOrderType.NONE);
   const [showRecentViewed, setShowRecentViewed] = useState<boolean>(false);
-  const [searchOption, setSearchOption] = useState<SeacrhOptionsType>(SeacrhOptionsType.BOOKS);
+  const [searchOption, setSearchOption] = useState<SearchOptionsType>(SearchOptionsType.BOOKS);
 
   const {
     books,
@@ -72,7 +72,7 @@ export const useBooksCatalog = () => {
     setSearchQuery('');
   };
 
-  const handleChangeSearchOption = (changedSearchOption: SeacrhOptionsType): void => {
+  const handleChangeSearchOption = (changedSearchOption: SearchOptionsType): void => {
     setSearchOption(changedSearchOption);
   };
 

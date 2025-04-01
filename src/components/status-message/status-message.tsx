@@ -1,4 +1,3 @@
-import React from 'react';
 import './status-message.scss';
 
 export enum StatusMessageType {

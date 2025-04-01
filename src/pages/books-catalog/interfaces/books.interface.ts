@@ -1,16 +1,16 @@
 export type Books = Book[];
 
 export interface Book {
-  url:           string;
-  name:          string;
-  isbn:          string;
-  authors:       string[];
+  url: string;
+  name: string;
+  isbn: string;
+  authors: string[];
   numberOfPages: number;
-  publisher:     string;
-  country:       string;
-  mediaType:     string;
-  released:      string;
-  characters:    string[];
+  publisher: string;
+  country: string;
+  mediaType: string;
+  released: string;
+  characters: string[];
   povCharacters: string[];
 }
 
@@ -34,7 +34,7 @@ export enum SortOrderType {
   NONE = 'None',
 }
 
-export enum SeacrhOptionsType {
+export enum SearchOptionsType {
   BOOKS = 'books',
   ISBN = 'isbn'
 }

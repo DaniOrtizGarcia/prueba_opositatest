@@ -1,7 +1,8 @@
-import React from 'react';
+import { useMemo } from 'react';
 import './book-card.scss';
 import { Book } from '../../interfaces/books.interface';
 import { getBookCoverUrl } from '../../utils/books-utils';
+import { Button, ButtonTypes } from '../../../../components/button/button';
 
 interface BookCardProps {
   book: Book;
@@ -12,14 +13,18 @@ interface BookCardProps {
 
 export const BookCard: React.FC<BookCardProps> = ({ book, handleOpenBookModal, handleFavorite, favorites }) => {
 
-  const favoriteIcon = favorites.includes(book.isbn) ? '★' : '☆';
+  const isFavorite = favorites.includes(book.isbn);
+  const favoriteIcon = isFavorite ? '★' : '☆';
+  const favoriteColor = isFavorite ? 'gold' : 'black';
+  const authorsList = book.authors.join(', ');
+  const bookCoverUrl = useMemo(() => getBookCoverUrl(book.isbn), [book.isbn]);
 
   return (
     <div className='book-card'>
       <img
         className='book-card__image'
         alt={book.name}
-        src={getBookCoverUrl(book.isbn)}
+        src={bookCoverUrl}
       />
       <div className='book-card__details'>
         <div className='book-card__details__header'>
@@ -30,26 +35,24 @@ export const BookCard: React.FC<BookCardProps> = ({ book, handleOpenBookModal, h
             {book.name}
           </h3>
 
-          <p className='book-card__details__header__author' title={book.authors.join(', ')}>
-            {book.authors.join(', ')}
+          <p className='book-card__details__header__author' title={authorsList}>
+            {authorsList}
           </p>
         </div>
 
-        <button
-          className='book-card__details__favorite'
+        <Button
+          type={ButtonTypes.ONLYICON}
+          text={favoriteIcon}
           onClick={() => handleFavorite(book)}
-          style={{color: favorites.includes(book.isbn) ? 'gold' : 'black'}}
-        >
-          {favoriteIcon}
-        </button>
+          colorText={favoriteColor}
+        />
       </div>
 
-      <button
-        className='book-card__view-more'
+      <Button
+        text='ver más...'
+        type={ButtonTypes.LINK}
         onClick={() => handleOpenBookModal(book)}
-      >
-        ver más...
-      </button>
+      />
     </div>
   );
 };

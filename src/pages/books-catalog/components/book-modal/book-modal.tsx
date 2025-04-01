@@ -1,8 +1,9 @@
-import React from 'react';
+import { useMemo } from 'react';
 import { Book } from '../../interfaces/books.interface';
 import { formatDate } from '../../../../utils/global-utils';
 import { getBookCoverUrl } from '../../utils/books-utils';
 import './book-modal.scss';
+import { Button, ButtonTypes } from '../../../../components/button/button';
 
 interface BookModalProps {
   selectedBook: Book;
@@ -13,29 +14,29 @@ interface BookModalProps {
 
 export const BookModal: React.FC<BookModalProps> = ({ selectedBook, favorites, handleFavorite, handleCloseBookModal }) => {
 
-  const favoriteIcon = favorites.includes(selectedBook.isbn) ? '★' : '☆';
+  const isFavorite = favorites.includes(selectedBook.isbn);
+  const favoriteIcon = isFavorite ? '★' : '☆';
+  const favoriteColor = isFavorite ? 'gold' : 'black';
+  const bookCoverUrl = useMemo(() => getBookCoverUrl(selectedBook.isbn), [selectedBook.isbn]);
 
   return (
     <div className="book-modal">
       <img
-        src={getBookCoverUrl(selectedBook.isbn)}
+        src={bookCoverUrl}
       />
 
       <div className='book-modal__information'>
-        <button className='book-modal__information__close' onClick={() => handleCloseBookModal()}>
-          X
-        </button>
+        <Button type={ButtonTypes.CLOSEICON} text='X' onClick={handleCloseBookModal} />
 
         <div className='book-modal__information__header'>
           <h2 className='book-modal__information__header__title'>{selectedBook.name}</h2>
 
-          <button
-            className='book-modal__information__header__favorite'
+          <Button
+            type={ButtonTypes.ONLYICON}
+            text={favoriteIcon}
             onClick={() => handleFavorite(selectedBook)}
-            style={{color: favorites.includes(selectedBook.isbn) ? 'gold' : 'black'}}
-          >
-            {favoriteIcon}
-          </button>
+            colorText={favoriteColor}
+          />
         </div>
 
         <div className='book-modal__information__details'>
