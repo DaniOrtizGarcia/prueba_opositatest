@@ -1,5 +1,7 @@
+import React from 'react';
 import { Book } from '../../interfaces/books.interface';
-import { formatDate, getBookCoverUrl } from '../../utils/books-utils';
+import { formatDate } from '../../../../utils/global-utils';
+import { getBookCoverUrl } from '../../utils/books-utils';
 import './book-modal.scss';
 
 interface BookModalProps {

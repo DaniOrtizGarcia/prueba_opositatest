@@ -18,8 +18,7 @@
       display: flex;
       gap: variables.$spacing-4;
   
-      &__recent-viewed,
-      &__sort {
+      &__button {
         height: fit-content;
         padding: variables.$spacing-1 variables.$spacing-2;
         border-radius: 5px;

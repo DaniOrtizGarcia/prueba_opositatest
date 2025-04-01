@@ -7,13 +7,13 @@ export const fetchBooks = async (): Promise<Books> => {
   try {
     const response = await get(BOOKS_LIST_API_URL);
     const data = await response.json();
-    return data.map(booksResponse);
+    return data.map(apiBooksParser);
   } catch {
     throw new Error('Error al solicitar los libros.');
   }
 };
 
-const booksResponse = (response: ApiBook): Book => {
+const apiBooksParser = (response: ApiBook): Book => {
   return {
     url: response.url,
     name: response.name,

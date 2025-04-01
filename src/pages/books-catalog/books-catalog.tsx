@@ -6,10 +6,11 @@ import { BookCard } from './components/book-card/book-card';
 import { Modal } from '../../components/modal/modal';
 import { BookModal } from './components/book-modal/book-modal';
 import { useBooksCatalog } from './hooks/use-books-catalog';
-import { filterBooksByQuery, getErrorMessage } from './utils/books-utils';
+import { filterBooksByQuery } from './utils/books-utils';
 import { Book } from './interfaces/books.interface';
 import { Loader } from '../../components/loader/loader';
 import { StatusMessage, StatusMessageType } from '../../components/status-message/status-message';
+import { getErrorMessage } from '../../utils/global-utils';
 
 const INPUT_PLACEHOLDER_BOOKS = 'Buscar libros';
 const NOT_FOUND_BOOKS_TEXT = 'No se han encontrado libros.';
@@ -31,7 +32,8 @@ export const BooksCatalog: React.FC = () => {
     handleFavorite,
     sortedBooks,
     showRecentViewed,
-    handleShowRecentViewed
+    handleShowRecentViewed,
+    handleResetFilters
   } = useBooksCatalog();
 
   const filteredBooks = filterBooksByQuery(sortedBooks, searchQuery);
@@ -59,6 +61,8 @@ export const BooksCatalog: React.FC = () => {
             books={books}
             showRecentViewed={showRecentViewed}
             handleShowRecentViewed={handleShowRecentViewed}
+            searchQuery={searchQuery}
+            handleResetFilters={handleResetFilters}
           />
 
           <div className="books-catalog__content__list">

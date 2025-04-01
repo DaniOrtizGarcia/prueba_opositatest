@@ -66,6 +66,11 @@ export const useBooksCatalog = () => {
     setShowRecentViewed((prev) => !prev);
   };
 
+  const handleResetFilters = (): void => {
+    setSortOrder(SortOrderType.None);
+    setSearchQuery('');
+  };
+
   return {
     books,
     isLoading,
@@ -82,6 +87,7 @@ export const useBooksCatalog = () => {
     handleFavorite,
     sortedBooks,
     showRecentViewed,
-    handleShowRecentViewed
+    handleShowRecentViewed,
+    handleResetFilters
   };
 };

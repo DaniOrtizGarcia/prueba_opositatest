@@ -11,10 +11,15 @@ interface BooksSearchActionsProps {
   books: Books;
   showRecentViewed: boolean;
   handleShowRecentViewed: () => void;
+  searchQuery: string;
+  handleResetFilters: () => void;
 }
 
 export const BooksSearchActions: React.FC<BooksSearchActionsProps> = (
-  { recentViewedBooks, totalBooks, handleSortBooks, isSorted, handleOpenBookModal, books, showRecentViewed, handleShowRecentViewed }
+  { 
+    recentViewedBooks, totalBooks, handleSortBooks, isSorted, handleOpenBookModal,
+    books, showRecentViewed, handleShowRecentViewed, searchQuery, handleResetFilters
+  }
 ) => {
 
   const recentViewedBooksList = useMemo(
@@ -27,6 +32,8 @@ export const BooksSearchActions: React.FC<BooksSearchActionsProps> = (
   const showRecentViewsText = showRecentViewed ? 'Ocultar vistos recientemente' : 'Mostrar vistos recientemente';
   const haveRecentViewedBooks = recentViewedBooksList.length;
 
+  const isDisableResetButton = isSorted === SortOrderType.None && !searchQuery;
+
   return (
     <div className="books-search-actions">
       <div className='books-search-actions__bar'>
@@ -36,14 +43,22 @@ export const BooksSearchActions: React.FC<BooksSearchActionsProps> = (
 
         <div className='books-search-actions__bar__actions'>
           <button
-            className='books-search-actions__bar__actions__recent-viewed'
+            className='books-search-actions__bar__actions__button'
             onClick={handleShowRecentViewed}
             disabled={!haveRecentViewedBooks}>
             {showRecentViewsText}
           </button>
 
-          <button className='books-search-actions__bar__actions__sort' onClick={handleSortBooks}>
+          <button className='books-search-actions__bar__actions__button' onClick={handleSortBooks}>
             {sortButtonText}
+          </button>
+
+          <button
+            className='books-search-actions__bar__actions__button'
+            onClick={handleResetFilters}
+            disabled={isDisableResetButton}
+          >
+            Limpiar filtros
           </button>
         </div>
       </div>

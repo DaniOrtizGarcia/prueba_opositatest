@@ -99,3 +99,6 @@ Se ha hecho un spinner con scss para indicar al usuario que se están cargando l
 
 ## Creado utils global
 Se ha creado un fichero de utils global para las funciones genércias.
+
+## Creada funcionalidad volver al estado inicial
+Una de las funcionalidades añadidas a la prueba es volver al estado inicial de la búsqueda.
