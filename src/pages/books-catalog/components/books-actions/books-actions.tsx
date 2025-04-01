@@ -65,7 +65,7 @@ export const BooksActions: React.FC<BooksActionsProps> = (
       <div
         className='books-actions__recent-viewed'
         style={{
-          maxHeight: showRecentViewed ? '50px' : 0,
+          maxHeight: showRecentViewed ? '500px' : 0,
           padding: showRecentViewed ? '12px 0' : 0      
         }}
       >

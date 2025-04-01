@@ -1,31 +1,52 @@
 .book-modal {
+  position: relative;
   display: flex;
+  flex-wrap: wrap;
   gap: variables.$spacing-6;
+
+  &__image {
+    margin: auto;
+  }
 
   &__information {
     width: 100%;
-    position: relative;
 
     &__header {
       display: flex;
       align-items: center;
       gap: variables.$spacing-3;
-      margin-bottom: variables.$spacing-6;
+      margin-bottom: variables.$spacing-2;
 
       &__title {
-        font-size: variables.$font-size-3xl;
+        font-size: variables.$font-size-xl;
+
+        @include mixins.media-responsive(md) {
+          font-size: variables.$font-size-3xl;
+        }
+      }
+
+      @include mixins.media-responsive(md) {
+        margin-bottom: variables.$spacing-3;
       }
     }
 
     &__details {
       &__text {
-        font-size: variables.$font-size-lg;
+        font-size: variables.$font-size-md;
 
         &__key {
           font-weight: bold;
           margin-right: variables.$spacing-2;
         }
+
+        @include mixins.media-responsive(md) {
+          font-size: variables.$font-size-lg;
+        }
       }
     }
+  }
+
+  @include mixins.media-responsive(md) {
+    flex-wrap: nowrap;
   }
 }

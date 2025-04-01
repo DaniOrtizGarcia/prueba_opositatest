@@ -2,13 +2,21 @@
   position: fixed;
   top: 50%;
   left: 50%;
+  width: 90%;
   transform: translate(-50%, -50%);
-  width: 50%;
   max-width: 650px;
   padding: variables.$spacing-6;
   border-radius: variables.$spacing-2;
   z-index: 9999;
   background-color: variables.$color-white;
+
+  @include mixins.media-responsive(xs) {
+    width: 65%;
+  }
+
+  @include mixins.media-responsive(lg) {
+    width: 50%;
+  }
 }
 
 .modal-backdrop {

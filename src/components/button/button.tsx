@@ -13,7 +13,7 @@ interface ButtonProps {
   text: string;
   onClick: (e: BaseSyntheticEvent) => void,
   colorText?: string,
-  disabled?: boolean
+  disabled?: boolean,
 }
 
 export const Button: React.FC<ButtonProps> = ({ type = ButtonTypes.DEFAULT, text, onClick, colorText, disabled }) => {

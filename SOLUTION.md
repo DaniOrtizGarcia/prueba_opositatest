@@ -109,3 +109,9 @@ Una de las funcionalidades añadidas a la prueba es seleccionar si buscar por no
 ## Creado componente BookSearch
 
 ## Creado componente Button
+
+## Creado fichero mixins
+Se ha creado un mixina para los media breakpoints y hacer la página responsive de maner más sencilla
+
+## Mobile First
+Se ha hecho el diseño desde dispositivos móbiles hasta de escritorio, para que a la hora de hacer el responsive se pueda hacer de manera más sencilla

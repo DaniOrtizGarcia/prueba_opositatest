@@ -22,6 +22,7 @@ export const BookModal: React.FC<BookModalProps> = ({ selectedBook, favorites, h
   return (
     <div className="book-modal">
       <img
+        className='book-modal__image'
         src={bookCoverUrl}
       />
 

@@ -9,7 +9,7 @@
     filter: brightness(0) invert(1);
   }
 
-  @media (min-width: variables.$breakpoint-md) {
+  @include mixins.media-responsive(md) {
     text-align: left;
   }
 }

@@ -3,12 +3,14 @@
 
   &__bar {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
     padding-bottom: variables.$spacing-3;
     border-bottom: 1px solid variables.$color-gray-dark;
+    gap: variables.$spacing-4;
   
     &__total {
+
       &__text {
         font-weight: bold;
       }
@@ -16,12 +18,25 @@
   
     &__actions {
       display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
       gap: variables.$spacing-4;
+
+      @include mixins.media-responsive(xs) {
+        flex-direction: row;
+      }
+    }
+
+    @include mixins.media-responsive(xs) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
     }
   }
 
   &__recent-viewed {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: variables.$spacing-3;
     border-bottom: 1px solid variables.$color-gray-dark;
