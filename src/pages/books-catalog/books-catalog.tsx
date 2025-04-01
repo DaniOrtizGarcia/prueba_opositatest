@@ -1,4 +1,3 @@
-import React from 'react';
 import './books-catalog.scss';
 import { SearchBar } from '../../components/search-bar/search-bar';
 import { BooksSearchActions } from './components/books-search-actions/books-search-actions';
@@ -7,7 +6,7 @@ import { Modal } from '../../components/modal/modal';
 import { BookModal } from './components/book-modal/book-modal';
 import { useBooksCatalog } from './hooks/use-books-catalog';
 import { filterBooksByQuery } from './utils/books-utils';
-import { Book } from './interfaces/books.interface';
+import { Book, SeacrhOptionsType } from './interfaces/books.interface';
 import { Loader } from '../../components/loader/loader';
 import { StatusMessage, StatusMessageType } from '../../components/status-message/status-message';
 import { getErrorMessage } from '../../utils/global-utils';
@@ -15,7 +14,7 @@ import { getErrorMessage } from '../../utils/global-utils';
 const INPUT_PLACEHOLDER_BOOKS = 'Buscar libros';
 const NOT_FOUND_BOOKS_TEXT = 'No se han encontrado libros.';
 
-export const BooksCatalog: React.FC = () => {
+export const BooksCatalog = () => {
   const {
     books,
     isLoading,
@@ -33,20 +32,42 @@ export const BooksCatalog: React.FC = () => {
     sortedBooks,
     showRecentViewed,
     handleShowRecentViewed,
-    handleResetFilters
+    handleResetFilters,
+    handleChangeSearchOption,
+    searchOption
   } = useBooksCatalog();
 
-  const filteredBooks = filterBooksByQuery(sortedBooks, searchQuery);
+  const filteredBooks = filterBooksByQuery(sortedBooks, searchQuery, searchOption);
   const booksLength = filteredBooks.length || 0;
 
   const isContentVisible = !isLoading && !error && booksLength > 0;
   const isBookListEmpty = !booksLength && !isLoading && !error;
 
-  const loadingBooksError = getErrorMessage(error);
+  const loadingBooksErrorMessage = getErrorMessage(error);
+
+  const isDisabledSearchBooksButton = searchOption === SeacrhOptionsType.BOOKS;
+  const isDisabledSearchIsbnButton = searchOption === SeacrhOptionsType.ISBN;
 
   return (
     <div className='books-catalog'>
-      <SearchBar searchQuery={searchQuery} handleSearch={handleSearch} inputPlaceholder={INPUT_PLACEHOLDER_BOOKS} />
+      <div className='books-catalog__search-options'>
+        <SearchBar searchQuery={searchQuery} handleSearch={handleSearch} inputPlaceholder={INPUT_PLACEHOLDER_BOOKS} />
+
+        <button
+          className='books-catalog__search-options__button'
+          onClick={() => handleChangeSearchOption(SeacrhOptionsType.BOOKS)}
+          disabled={isDisabledSearchBooksButton}
+        >
+          Libro
+        </button>
+        <button
+          className='books-catalog__search-options__button'
+          onClick={() => handleChangeSearchOption(SeacrhOptionsType.ISBN)}
+          disabled={isDisabledSearchIsbnButton}
+        >
+          Isbn
+        </button>
+      </div>
 
       {isLoading && <Loader />}
 
@@ -79,7 +100,7 @@ export const BooksCatalog: React.FC = () => {
         </div>
       )}
 
-      {error && !isLoading && <StatusMessage status={StatusMessageType.ERROR} message={loadingBooksError} />}
+      {error && !isLoading && <StatusMessage status={StatusMessageType.ERROR} message={loadingBooksErrorMessage} />}
 
       {isBookListEmpty && <StatusMessage status={StatusMessageType.INFO} message={NOT_FOUND_BOOKS_TEXT} />}
 

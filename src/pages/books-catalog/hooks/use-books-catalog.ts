@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Book, Books, SortOrderType } from '../interfaces/books.interface';
+import { Book, Books, SeacrhOptionsType, SortOrderType } from '../interfaces/books.interface';
 import { useFetchBooks } from './use-fetch-books';
 
 const ASCENDING = -1;
@@ -10,8 +10,9 @@ export const useBooksCatalog = () => {
   const [favorites, setFavorites] = useState<string[]>([]);
   const [recentViewedBooks, setRecentViewedBooks] = useState<Set<string>>(new Set());
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
-  const [sortOrder, setSortOrder] = useState<SortOrderType>(SortOrderType.None);  
-  const [showRecentViewed, setShowRecentViewed] = useState(false);
+  const [sortOrder, setSortOrder] = useState<SortOrderType>(SortOrderType.NONE);
+  const [showRecentViewed, setShowRecentViewed] = useState<boolean>(false);
+  const [searchOption, setSearchOption] = useState<SeacrhOptionsType>(SeacrhOptionsType.BOOKS);
 
   const {
     books,
@@ -24,20 +25,20 @@ export const useBooksCatalog = () => {
   };
 
   const handleSortBooks = (): void => {
-    const changedSortOrder = sortOrder === SortOrderType.Ascending ? 
-      SortOrderType.Descending : SortOrderType.Ascending;
+    const changedSortOrder = sortOrder === SortOrderType.ASCENDING ? 
+      SortOrderType.DESCENDING : SortOrderType.ASCENDING;
     setSortOrder(
       changedSortOrder
     );
   };
 
   const sortedBooks = useMemo((): Books => {
-    if (sortOrder === SortOrderType.None) {
+    if (sortOrder === SortOrderType.NONE) {
       return books;
     }
 
     return [...books].sort((a, b) => {
-      const order = sortOrder === SortOrderType.Descending ? ASCENDING : DESCENDING;
+      const order = sortOrder === SortOrderType.DESCENDING ? ASCENDING : DESCENDING;
       return order * a.name.localeCompare(b.name);
     });
   }, [books, sortOrder]);
@@ -67,8 +68,12 @@ export const useBooksCatalog = () => {
   };
 
   const handleResetFilters = (): void => {
-    setSortOrder(SortOrderType.None);
+    setSortOrder(SortOrderType.NONE);
     setSearchQuery('');
+  };
+
+  const handleChangeSearchOption = (changedSearchOption: SeacrhOptionsType): void => {
+    setSearchOption(changedSearchOption);
   };
 
   return {
@@ -88,6 +93,8 @@ export const useBooksCatalog = () => {
     sortedBooks,
     showRecentViewed,
     handleShowRecentViewed,
-    handleResetFilters
+    handleResetFilters,
+    handleChangeSearchOption,
+    searchOption
   };
 };

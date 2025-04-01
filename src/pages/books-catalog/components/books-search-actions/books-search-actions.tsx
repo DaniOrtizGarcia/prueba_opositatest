@@ -27,12 +27,12 @@ export const BooksSearchActions: React.FC<BooksSearchActionsProps> = (
     [books, recentViewedBooks]
   );
 
-  const sortButtonText = isSorted === SortOrderType.Ascending ? 'Ordenar Descendente' : 'Ordenar Ascendente';
+  const sortButtonText = isSorted === SortOrderType.ASCENDING ? 'Ordenar Descendente' : 'Ordenar Ascendente';
 
   const showRecentViewsText = showRecentViewed ? 'Ocultar vistos recientemente' : 'Mostrar vistos recientemente';
   const haveRecentViewedBooks = recentViewedBooksList.length;
 
-  const isDisableResetButton = isSorted === SortOrderType.None && !searchQuery;
+  const isDisableResetButton = isSorted === SortOrderType.NONE && !searchQuery;
 
   return (
     <div className="books-search-actions">

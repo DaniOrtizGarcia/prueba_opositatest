@@ -29,7 +29,12 @@ export interface ApiBook {
 }
 
 export enum SortOrderType {
-  Ascending = 'Ascending',
-  Descending = 'Descending',
-  None = 'None',
+  ASCENDING = 'Ascending',
+  DESCENDING = 'Descending',
+  NONE = 'None',
+}
+
+export enum SeacrhOptionsType {
+  BOOKS = 'books',
+  ISBN = 'isbn'
 }

@@ -9,14 +9,12 @@ interface SearchBarProps {
 
 export const SearchBar: React.FC<SearchBarProps> = ({searchQuery, handleSearch, inputPlaceholder}) => {
   return (
-    <div className="search-bar">
-      <input
-        type="text"
-        className="search-bar__input"
-        placeholder={inputPlaceholder}
-        value={searchQuery}
-        onChange={(e) => handleSearch(e.target.value)}
-      />
-    </div>
+    <input
+      type="text"
+      className="search-bar"
+      placeholder={inputPlaceholder}
+      value={searchQuery}
+      onChange={(e) => handleSearch(e.target.value)}
+    />
   );
 };
