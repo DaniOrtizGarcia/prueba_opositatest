@@ -1,0 +1,22 @@
+.books-search {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: variables.$spacing-3;
+  
+  &__button {
+    height: fit-content;
+    padding: variables.$spacing-1 variables.$spacing-2;
+    border-radius: 5px;
+    border: 0;
+    background-color: variables.$color-black;
+    color: variables.$color-white;
+    cursor: pointer;
+
+    &:disabled {
+      background-color: variables.$color-gray-dark;
+      cursor: not-allowed;
+    }
+  }
+}

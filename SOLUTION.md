@@ -105,3 +105,5 @@ Una de las funcionalidades añadidas a la prueba es volver al estado inicial de 
 
 ## Nueva funcionalidad selccionar buscar por nombre o por isbn
 Una de las funcionalidades añadidas a la prueba es seleccionar si buscar por nombre o por isbn.
+
+## Creado componente BookSearch

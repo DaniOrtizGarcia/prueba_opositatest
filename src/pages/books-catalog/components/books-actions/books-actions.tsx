@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 import { Book, Books, SortOrderType } from '../../interfaces/books.interface';
-import './books-search-actions.scss';
+import './books-actions.scss';
 
-interface BooksSearchActionsProps {
+interface BooksActionsProps {
   recentViewedBooks: Set<string>;
   totalBooks: number;
   handleSortBooks: () => void;
@@ -15,7 +15,7 @@ interface BooksSearchActionsProps {
   handleResetFilters: () => void;
 }
 
-export const BooksSearchActions: React.FC<BooksSearchActionsProps> = (
+export const BooksActions: React.FC<BooksActionsProps> = (
   { 
     recentViewedBooks, totalBooks, handleSortBooks, isSorted, handleOpenBookModal,
     books, showRecentViewed, handleShowRecentViewed, searchQuery, handleResetFilters
@@ -35,26 +35,26 @@ export const BooksSearchActions: React.FC<BooksSearchActionsProps> = (
   const isDisableResetButton = isSorted === SortOrderType.NONE && !searchQuery;
 
   return (
-    <div className="books-search-actions">
-      <div className='books-search-actions__bar'>
-        <p className='books-search-actions__bar__total'>
-          <span className='books-search-actions__total__text'>Libros encontrados:</span> {totalBooks}
+    <div className="books-actions">
+      <div className='books-actions__bar'>
+        <p className='books-actions__bar__total'>
+          <span className='books-actions__total__text'>Libros encontrados:</span> {totalBooks}
         </p>
 
-        <div className='books-search-actions__bar__actions'>
+        <div className='books-actions__bar__actions'>
           <button
-            className='books-search-actions__bar__actions__button'
+            className='books-actions__bar__actions__button'
             onClick={handleShowRecentViewed}
             disabled={!haveRecentViewedBooks}>
             {showRecentViewsText}
           </button>
 
-          <button className='books-search-actions__bar__actions__button' onClick={handleSortBooks}>
+          <button className='books-actions__bar__actions__button' onClick={handleSortBooks}>
             {sortButtonText}
           </button>
 
           <button
-            className='books-search-actions__bar__actions__button'
+            className='books-actions__bar__actions__button'
             onClick={handleResetFilters}
             disabled={isDisableResetButton}
           >
@@ -64,7 +64,7 @@ export const BooksSearchActions: React.FC<BooksSearchActionsProps> = (
       </div>
 
       <div
-        className='books-search-actions__recent-viewed'
+        className='books-actions__recent-viewed'
         style={{
           maxHeight: showRecentViewed ? '50px' : 0,
           padding: showRecentViewed ? '12px 0' : 0      
@@ -73,7 +73,7 @@ export const BooksSearchActions: React.FC<BooksSearchActionsProps> = (
         {recentViewedBooksList.map((book: Book) => (
           <button
             key={book.isbn}
-            className='books-search-actions__recent-viewed__book-name'
+            className='books-actions__recent-viewed__book-name'
             onClick={() => handleOpenBookModal(book)}
           >
             {book.name}
