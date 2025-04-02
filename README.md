@@ -1,3 +1,6 @@
+# Se ha desplegado la prueba técnica en Vercel
+https://prueba-opositatest.vercel.app/
+
 # Prueba técnica para OpositaTest  
 
 ¡Te damos la bienvenida a la prueba técnica de OpositaTest!
