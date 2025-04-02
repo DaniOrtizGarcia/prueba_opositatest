@@ -1,8 +1,8 @@
 import { BooksCatalog } from './pages/books-catalog/books-catalog';
-import Header from './components/header/header';
-import Footer from './components/footer/footer';
+import { Header } from './components/header/header';
+import { Footer } from './components/footer/footer';
 
-const App = () => {
+export const App = () => {
   return (
     <>
       <Header />
@@ -11,5 +11,3 @@ const App = () => {
     </>
   );
 };
-
-export default App;
