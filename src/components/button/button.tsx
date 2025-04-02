@@ -8,7 +8,7 @@ export enum ButtonTypes {
   CLOSEICON = 'close-icon'
 }
 
-interface ButtonProps {
+export interface ButtonProps {
   type?: ButtonTypes,
   text: string;
   onClick: (e: BaseSyntheticEvent) => void,

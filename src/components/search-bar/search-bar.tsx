@@ -1,6 +1,6 @@
 import "./search-bar.scss";
 
-interface SearchBarProps {
+export interface SearchBarProps {
   searchQuery: string;
   handleSearch: (searchValue: string) => void;
   inputPlaceholder: string;

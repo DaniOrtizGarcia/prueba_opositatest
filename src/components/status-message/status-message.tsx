@@ -5,14 +5,14 @@ export enum StatusMessageType {
   ERROR = 'error'
 }
 
-interface StatusMessageProps {
+export interface StatusMessageProps {
   status: StatusMessageType;
   message: string;
 }
 
 export const StatusMessage: React.FC<StatusMessageProps> = ({ status, message }) => {
   return (
-    <div className={`status-message ${status}`}>
+    <div data-testid="status-message" className={`status-message ${status}`}>
       <p className="status-message__text">{message}</p>
     </div>
   );

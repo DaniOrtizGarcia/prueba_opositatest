@@ -7,7 +7,7 @@ interface ModalProps {
 export const Modal: React.FC<ModalProps> = ({ children }) => {
   return (
     <>
-      <div className="modal">
+      <div data-testid="modal" className="modal">
         {children}
       </div>
       <div className="modal-backdrop"></div>
