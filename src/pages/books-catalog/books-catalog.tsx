@@ -54,7 +54,7 @@ export const BooksCatalog = () => {
       {isLoading && <Loader />}
 
       {isContentVisible && (
-        <div className="books-catalog__content">
+        <div className='books-catalog__content'>
           <BooksActions
             recentViewedBooks={recentViewedBooks}
             totalBooks={booksLength}
@@ -68,7 +68,7 @@ export const BooksCatalog = () => {
             handleResetFilters={handleResetFilters}
           />
 
-          <div className="books-catalog__content__list">
+          <div className='books-catalog__content__list'>
             {filteredBooks.map((book: Book) => (
               <BookCard
                 key={book.isbn}

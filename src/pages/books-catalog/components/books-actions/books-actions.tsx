@@ -36,7 +36,7 @@ export const BooksActions: React.FC<BooksActionsProps> = (
   const isDisableResetButton = isSorted === SortOrderType.NONE && !searchQuery;
 
   return (
-    <div className="books-actions">
+    <div className='books-actions'>
       <div className='books-actions__bar'>
         <p className='books-actions__bar__total'>
           <span className='books-actions__total__text'>Libros encontrados:</span> {totalBooks}

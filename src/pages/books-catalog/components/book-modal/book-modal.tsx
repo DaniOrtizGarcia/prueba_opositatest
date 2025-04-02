@@ -20,7 +20,7 @@ export const BookModal: React.FC<BookModalProps> = ({ selectedBook, favorites, h
   const bookCoverUrl = useMemo(() => getBookCoverUrl(selectedBook.isbn), [selectedBook.isbn]);
 
   return (
-    <div className="book-modal">
+    <div className='book-modal'>
       <img
         className='book-modal__image'
         src={bookCoverUrl}

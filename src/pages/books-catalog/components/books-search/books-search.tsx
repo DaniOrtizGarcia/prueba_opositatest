@@ -1,6 +1,6 @@
-import { Button } from "../../../../components/button/button";
-import { SearchBar } from "../../../../components/search-bar/search-bar";
-import { SearchOptionsType } from "../../interfaces/books.interface";
+import { Button } from '../../../../components/button/button';
+import { SearchBar } from '../../../../components/search-bar/search-bar';
+import { SearchOptionsType } from '../../interfaces/books.interface';
 import './books-search.scss';
 
 export interface BooksSearchProps {

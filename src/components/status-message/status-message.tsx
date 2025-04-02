@@ -12,8 +12,8 @@ export interface StatusMessageProps {
 
 export const StatusMessage: React.FC<StatusMessageProps> = ({ status, message }) => {
   return (
-    <div data-testid="status-message" className={`status-message ${status}`}>
-      <p className="status-message__text">{message}</p>
+    <div data-testid='status-message' className={`status-message ${status}`}>
+      <p className='status-message__text'>{message}</p>
     </div>
   );
 };

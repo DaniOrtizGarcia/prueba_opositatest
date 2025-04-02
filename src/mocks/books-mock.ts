@@ -1,4 +1,4 @@
-import { Books } from "../pages/books-catalog/interfaces/books.interface";
+import { Books } from '../pages/books-catalog/interfaces/books.interface';
 
 export const booksMock: Books = [
   {
