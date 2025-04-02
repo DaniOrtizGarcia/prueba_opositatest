@@ -1,6 +1,8 @@
 # Se ha desplegado la prueba técnica en Vercel
 https://prueba-opositatest.vercel.app/
 
+# Las mejoras son Limpiar Filtros, Poder buscar por Isbn y Responsive utilizando mobile first.
+
 # Prueba técnica para OpositaTest  
 
 ¡Te damos la bienvenida a la prueba técnica de OpositaTest!
