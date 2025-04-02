@@ -5,6 +5,8 @@ import { describe, it, expect, vi } from 'vitest';
 
 const mockHandleSearch = vi.fn();
 const mockHandleChangeOption = vi.fn();
+const getBooksSearchButtonBook = () => screen.getByText('Libro');
+const getBooksSearchButtonIsbn = () => screen.getByText('Isbn');
 const renderBooksSearch = (props: BooksSearchProps) =>
   render(
     <BooksSearch
@@ -22,8 +24,8 @@ describe('BooksSearch', () => {
     });
 
     expect(screen.getByPlaceholderText('Buscar libros')).toBeInTheDocument();
-    expect(screen.getByText('Libro')).toBeInTheDocument();
-    expect(screen.getByText('Isbn')).toBeInTheDocument();
+    expect(getBooksSearchButtonBook()).toBeInTheDocument();
+    expect(getBooksSearchButtonIsbn()).toBeInTheDocument();
   });
 
   it('disables "Libro" button when books search is active', () => {
@@ -34,8 +36,8 @@ describe('BooksSearch', () => {
       handleChangeSearchOption: mockHandleChangeOption
     });
 
-    expect(screen.getByText('Libro')).toBeDisabled();
-    expect(screen.getByText('Isbn')).toBeEnabled();
+    expect(getBooksSearchButtonBook()).toBeDisabled();
+    expect(getBooksSearchButtonIsbn()).toBeEnabled();
   });
 
   it('disables "Isbn" button when ISBN search is active', () => {
@@ -46,8 +48,8 @@ describe('BooksSearch', () => {
       handleChangeSearchOption: mockHandleChangeOption
     });
 
-    expect(screen.getByText('Isbn')).toBeDisabled();
-    expect(screen.getByText('Libro')).toBeEnabled();
+    expect(getBooksSearchButtonIsbn()).toBeDisabled();
+    expect(getBooksSearchButtonBook()).toBeEnabled();
   });
 
   it('calls handleChangeSearchOption when button "Isbn" clicked', () => {
@@ -58,7 +60,7 @@ describe('BooksSearch', () => {
       handleChangeSearchOption: mockHandleChangeOption
     });
 
-    fireEvent.click(screen.getByText('Isbn'));
+    fireEvent.click(getBooksSearchButtonIsbn());
 
     expect(mockHandleChangeOption).toHaveBeenCalledWith(SearchOptionsType.ISBN);
   });
@@ -71,7 +73,7 @@ describe('BooksSearch', () => {
       handleChangeSearchOption: mockHandleChangeOption
     });
 
-    fireEvent.click(screen.getByText('Libro'));
+    fireEvent.click(getBooksSearchButtonBook());
     
     expect(mockHandleChangeOption).toHaveBeenCalledWith(SearchOptionsType.BOOKS);
   });

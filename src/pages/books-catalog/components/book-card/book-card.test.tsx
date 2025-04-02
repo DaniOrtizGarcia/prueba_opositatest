@@ -6,6 +6,8 @@ import { getBookCoverUrl } from '../../utils/books-utils';
 
 const mockHandleOpenBookModal = vi.fn();
 const mockHandleFavorite = vi.fn();
+const getBookCardViewMore = () => screen.getByText('ver más...');
+const getBookCardFavorite = () => screen.getByText('☆');
 const renderBookCard = (props: BookCardProps) =>
   render(
     <BookCard
@@ -25,8 +27,8 @@ describe('BookCard', () => {
 
     expect(screen.getByText('The Great Book')).toBeInTheDocument();
     expect(screen.getByText('Author One')).toBeInTheDocument();
-    expect(screen.getByText('☆')).toBeInTheDocument();
-    expect(screen.getByText('ver más...')).toBeInTheDocument();
+    expect(getBookCardFavorite()).toBeInTheDocument();
+    expect(getBookCardViewMore()).toBeInTheDocument();
     expect(screen.getByAltText('The Great Book')).toHaveAttribute('src', bookCoverUrl);
   });
 
@@ -49,22 +51,20 @@ describe('BookCard', () => {
       favorites: []
     });
 
-    fireEvent.click(screen.getByText('☆'));
+    fireEvent.click(getBookCardFavorite());
 
     expect(mockHandleFavorite).toHaveBeenCalledWith(booksMock[0]);
   });
 
   it('should call handleOpenBookModal when "ver más" is clicked', () => {
-    render(
-      <BookCard
-        book={booksMock[0]}
-        handleOpenBookModal={mockHandleOpenBookModal}
-        handleFavorite={mockHandleFavorite}
-        favorites={[]}
-      />
-    );
+    renderBookCard({
+      book: booksMock[0],
+      handleOpenBookModal: mockHandleOpenBookModal,
+      handleFavorite: mockHandleFavorite,
+      favorites: []
+    });
 
-    fireEvent.click(screen.getByText('ver más...'));
+    fireEvent.click(getBookCardViewMore());
     
     expect(mockHandleOpenBookModal).toHaveBeenCalledWith(booksMock[0]);
   });

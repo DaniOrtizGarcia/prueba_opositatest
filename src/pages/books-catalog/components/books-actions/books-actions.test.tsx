@@ -9,6 +9,9 @@ const mockHandleSort = vi.fn();
 const mockHandleOpenModal = vi.fn();
 const mockHandleShowRecent = vi.fn();
 const mockHandleReset = vi.fn();
+const getBooksActionsSortAsc = () => screen.getByText('Ordenar Ascendente');
+const getBooksActionsRecentViewed = () => screen.getByText('Mostrar vistos recientemente');
+const getBooksActionsClearFilters = () => screen.getByText('Limpiar filtros');
 const renderBooksActions = (props: BooksActionsProps) =>
   render(
     <BooksActions
@@ -36,22 +39,20 @@ describe('BooksActions', () => {
   });
 
   it('shows sort button with correct text', () => {
-    render(
-      <BooksActions
-        books={booksMock}
-        totalBooks={2}
-        recentViewedBooks={mockRecentViewedBooks}
-        handleSortBooks={mockHandleSort}
-        isSorted={SortOrderType.NONE}
-        handleOpenBookModal={mockHandleOpenModal}
-        showRecentViewed={false}
-        handleShowRecentViewed={mockHandleShowRecent}
-        searchQuery=""
-        handleResetFilters={mockHandleReset}
-      />
-    );
+    renderBooksActions({
+      books: booksMock,
+      totalBooks: 2,
+      recentViewedBooks: mockRecentViewedBooks,
+      handleSortBooks: mockHandleSort,
+      isSorted: SortOrderType.NONE,
+      handleOpenBookModal: mockHandleOpenModal,
+      showRecentViewed: false,
+      handleShowRecentViewed: mockHandleShowRecent,
+      searchQuery: '',
+      handleResetFilters: mockHandleReset
+    });
 
-    expect(screen.getByText('Ordenar Ascendente')).toBeInTheDocument();
+    expect(getBooksActionsSortAsc()).toBeInTheDocument();
   });
 
   it('changes sort button text when sorted', () => {
@@ -85,7 +86,7 @@ describe('BooksActions', () => {
       handleResetFilters: mockHandleReset
     });
 
-    expect(screen.getByText('Mostrar vistos recientemente')).toBeDisabled();
+    expect(getBooksActionsRecentViewed()).toBeDisabled();
   });
 
   it('shows recent viewed books when expanded', () => {
@@ -120,7 +121,7 @@ describe('BooksActions', () => {
       handleResetFilters: mockHandleReset
     });
 
-    expect(screen.getByText('Limpiar filtros')).toBeDisabled();
+    expect(getBooksActionsClearFilters()).toBeDisabled();
   });
 
   it('enables reset button when filters applied', () => {
@@ -137,7 +138,7 @@ describe('BooksActions', () => {
       handleResetFilters: mockHandleReset
     });
 
-    expect(screen.getByText('Limpiar filtros')).toBeEnabled();
+    expect(getBooksActionsClearFilters()).toBeEnabled();
   });
 
   it('calls handlers when buttons clicked', () => {
@@ -154,9 +155,9 @@ describe('BooksActions', () => {
       handleResetFilters: mockHandleReset
     });
 
-    fireEvent.click(screen.getByText('Mostrar vistos recientemente'));
-    fireEvent.click(screen.getByText('Ordenar Ascendente'));
-    fireEvent.click(screen.getByText('Limpiar filtros'));
+    fireEvent.click(getBooksActionsRecentViewed());
+    fireEvent.click(getBooksActionsSortAsc());
+    fireEvent.click(getBooksActionsClearFilters());
 
     expect(mockHandleShowRecent).toHaveBeenCalled();
     expect(mockHandleSort).toHaveBeenCalled();

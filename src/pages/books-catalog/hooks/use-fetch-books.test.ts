@@ -5,12 +5,10 @@ import { describe, it, expect, vi } from 'vitest';
 import { booksMock } from '../../../mocks/books-mock';
 import { Books } from '../interfaces/books.interface';
 
-// Mock the react-query module
 vi.mock('@tanstack/react-query', () => ({
   useQuery: vi.fn(),
 }));
 
-// Mock the books service
 vi.mock('../services/books-service', () => ({
   fetchBooks: vi.fn(),
 }));
