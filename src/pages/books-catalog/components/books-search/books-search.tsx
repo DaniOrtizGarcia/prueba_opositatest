@@ -3,7 +3,7 @@ import { SearchBar } from "../../../../components/search-bar/search-bar";
 import { SearchOptionsType } from "../../interfaces/books.interface";
 import './books-search.scss';
 
-interface BooksSearchProps {
+export interface BooksSearchProps {
   searchOption: SearchOptionsType,
   searchQuery: string,
   handleSearch: (searchValue: string) => void,

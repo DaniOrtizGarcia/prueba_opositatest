@@ -20,6 +20,7 @@ describe('SearchBar Component', () => {
     const searchInput = getSearchInput();
     
     fireEvent.change(searchInput, { target: { value: 'test' } });
+    
     expect(handleSearchMock).toHaveBeenCalledWith('test');
   });
 });

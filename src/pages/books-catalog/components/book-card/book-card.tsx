@@ -4,7 +4,7 @@ import { Book } from '../../interfaces/books.interface';
 import { getBookCoverUrl } from '../../utils/books-utils';
 import { Button, ButtonTypes } from '../../../../components/button/button';
 
-interface BookCardProps {
+export interface BookCardProps {
   book: Book;
   handleOpenBookModal: (book: Book) => void;
   handleFavorite: (book: Book) => void;

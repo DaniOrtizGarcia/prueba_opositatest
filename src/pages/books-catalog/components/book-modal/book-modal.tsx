@@ -5,7 +5,7 @@ import { getBookCoverUrl } from '../../utils/books-utils';
 import './book-modal.scss';
 import { Button, ButtonTypes } from '../../../../components/button/button';
 
-interface BookModalProps {
+export interface BookModalProps {
   selectedBook: Book;
   favorites: string[];
   handleFavorite: (book: Book) => void;
@@ -24,6 +24,7 @@ export const BookModal: React.FC<BookModalProps> = ({ selectedBook, favorites, h
       <img
         className='book-modal__image'
         src={bookCoverUrl}
+        alt={selectedBook.name}
       />
 
       <div className='book-modal__information'>

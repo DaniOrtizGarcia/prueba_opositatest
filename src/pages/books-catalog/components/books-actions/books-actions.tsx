@@ -3,7 +3,7 @@ import { Book, Books, SortOrderType } from '../../interfaces/books.interface';
 import './books-actions.scss';
 import { Button, ButtonTypes } from '../../../../components/button/button';
 
-interface BooksActionsProps {
+export interface BooksActionsProps {
   recentViewedBooks: Set<string>;
   totalBooks: number;
   handleSortBooks: () => void;

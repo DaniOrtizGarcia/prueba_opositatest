@@ -2,9 +2,6 @@ import { useMemo, useState } from 'react';
 import { Book, Books, SearchOptionsType, SortOrderType } from '../interfaces/books.interface';
 import { useFetchBooks } from './use-fetch-books';
 
-const ASCENDING = -1;
-const DESCENDING = 1;
-
 export const useBooksCatalog = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [favorites, setFavorites] = useState<string[]>([]);
@@ -31,16 +28,14 @@ export const useBooksCatalog = () => {
       changedSortOrder
     );
   };
-
   const sortedBooks = useMemo((): Books => {
     if (sortOrder === SortOrderType.NONE) {
       return books;
     }
 
-    return [...books].sort((a, b) => {
-      const order = sortOrder === SortOrderType.DESCENDING ? ASCENDING : DESCENDING;
-      return order * a.name.localeCompare(b.name);
-    });
+    return [...books].sort((a, b) =>
+      (sortOrder === SortOrderType.ASCENDING ? 1 : -1) * a.name.localeCompare(b.name)
+    );
   }, [books, sortOrder]);
 
   const handleOpenBookModal = (selectedBook: Book): void => {

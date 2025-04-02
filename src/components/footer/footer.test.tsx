@@ -9,6 +9,7 @@ describe('Footer Component', () => {
   it('should render the footer with correct text', () => {
     renderFooter();
     const footerElement = getFooterElement();
+    
     expect(footerElement).toBeInTheDocument();
     expect(footerElement).toHaveTextContent('Prueba técnica OpositaTest');
   });
